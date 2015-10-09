@@ -13,7 +13,11 @@ public class ChessPlayer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void moveChessPiece() {
+	/**
+	 * 
+	 * @param move
+	 */
+	public void moveChessPiece(String move) {
 		// TODO - implement ChessPlayer.moveChessPiece
 		throw new UnsupportedOperationException();
 	}

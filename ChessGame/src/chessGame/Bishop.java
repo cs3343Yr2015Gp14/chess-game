@@ -11,9 +11,13 @@ public class Bishop extends ChessPiece {
 		throw new UnsupportedOperationException();
 	}
 
-	public String[] getAvailableMoves() {
-		return null;
-
+	/**
+	 * 
+	 * @param move
+	 */
+	public boolean moveIsAvailable(String move) {
+		// TODO - implement Bishop.moveIsAvailable
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -11,9 +11,13 @@ public class King extends ChessPiece {
 		throw new UnsupportedOperationException();
 	}
 
-	public String[] getAvailableMoves() {
-		return null;
-
+	/**
+	 * 
+	 * @param move
+	 */
+	public boolean moveIsAvailable(String move) {
+		// TODO - implement King.moveIsAvailable
+		throw new UnsupportedOperationException();
 	}
 
 }

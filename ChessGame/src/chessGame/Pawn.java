@@ -11,9 +11,13 @@ public class Pawn extends ChessPiece {
 		throw new UnsupportedOperationException();
 	}
 
-	public String[] getAvailableMoves() {
-		return null;
-
+	/**
+	 * 
+	 * @param move
+	 */
+	public boolean moveIsAvailable(String move) {
+		// TODO - implement Pawn.moveIsAvailable
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -11,9 +11,13 @@ public class Rook extends ChessPiece {
 		throw new UnsupportedOperationException();
 	}
 
-	public String[] getAvailableMoves() {
-		return null;
-
+	/**
+	 * 
+	 * @param move
+	 */
+	public boolean moveIsAvailable(String move) {
+		// TODO - implement Rook.moveIsAvailable
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -6,23 +6,25 @@ public abstract class ChessPiece {
 	private ChessPlayer player;
 
 	public ChessPlayer getPlayer() {
-		return player;
-
+		return this.player;
 	}
 
-	public abstract String[] getAvailableMoves();
-
-	public void updatePosition() {
-		// TODO - implement ChessPiece.updatePosition
-		throw new UnsupportedOperationException();
+	public String getPosition() {
+		return this.position;
 	}
 
 	/**
 	 * 
-	 * @param moves
+	 * @param move
 	 */
-	public boolean movesIsAvailable(String moves) {
-		// TODO - implement ChessPiece.movesIsAvailable
+	public abstract boolean moveIsAvailable(String move);
+
+	/**
+	 * 
+	 * @param move
+	 */
+	public void updatePosition(String move) {
+		// TODO - implement ChessPiece.updatePosition
 		throw new UnsupportedOperationException();
 	}
 

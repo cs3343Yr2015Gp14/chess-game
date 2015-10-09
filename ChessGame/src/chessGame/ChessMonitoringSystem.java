@@ -6,7 +6,8 @@ public class ChessMonitoringSystem {
 	private ChessMonitoringSystem instance;
 
 	private ChessMonitoringSystem() {
-
+		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
+		throw new UnsupportedOperationException();
 	}
 
 	public ChessMonitoringSystem getInstance() {
@@ -23,17 +24,31 @@ public class ChessMonitoringSystem {
 		throw new UnsupportedOperationException();
 	}
 
-	public void showAllChessPiecePosition() {
-		// TODO - implement ChessMonitoringSystem.showAllChessPiecePosition
+	public void showAllChessPiecesPosition() {
+		// TODO - implement ChessMonitoringSystem.showAllChessPiecesPosition
 		throw new UnsupportedOperationException();
 	}
 
-	public void moveChessPiece() {
+	/**
+	 * 
+	 * @param move
+	 * @param playerId
+	 */
+	public void moveChessPiece(String move, String playerId) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		throw new UnsupportedOperationException();
 	}
 
-	public void removeChessPiece() {
+	private boolean chessPieceIsCaptured() {
+		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param position
+	 */
+	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		throw new UnsupportedOperationException();
 	}
