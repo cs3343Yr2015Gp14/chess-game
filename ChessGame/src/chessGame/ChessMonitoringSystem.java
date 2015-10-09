@@ -34,7 +34,7 @@ public class ChessMonitoringSystem {
 	 * @param move
 	 * @param playerId
 	 */
-	public void moveChessPiece(String move, String playerId) {
+	public void moveChessPiece(String move, ChessPlayer player) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		throw new UnsupportedOperationException();
 	}
