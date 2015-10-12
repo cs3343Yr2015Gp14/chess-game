@@ -19,6 +19,7 @@ public abstract class ChessPiece {
 		if( moveIsAvailable(move) == true){
 			this.position = move;
 		}
+		
 	}
 
 }
