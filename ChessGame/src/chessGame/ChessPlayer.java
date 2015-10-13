@@ -8,7 +8,7 @@ public class ChessPlayer {
 	 * 
 	 * @param id
 	 */
-	public ChessPlayer(String id) {
+	public ChessPlayer(String id, String name) {
 		this.id=id;
 		this.name=name;
 	}
