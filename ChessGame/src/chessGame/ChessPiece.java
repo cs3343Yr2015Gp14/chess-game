@@ -4,7 +4,12 @@ public abstract class ChessPiece {
 
 	private String position;
 	private ChessPlayer player;
-
+	
+	public ChessPiece(ChessPlayer player, String position){
+		this.player=player;
+		this.position=position;
+	}
+	
 	public ChessPlayer getPlayer() {
 		return this.player;
 	}
@@ -14,12 +19,9 @@ public abstract class ChessPiece {
 	public String getPosition() {
 		return this.position;
 	}
-
+	
 	public void updatePosition(String move){
-		if( moveIsAvailable(move) == true){
-			this.position = move;
-		}
-		
+		this.position = move;
 	}
-
+	
 }
