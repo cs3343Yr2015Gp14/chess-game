@@ -69,7 +69,7 @@ public class ChessMonitoringSystem {
 		for (ChessPiece c: allChessPieces)
 		{
 			tempPos = c.getPosition();
-			xPosInNum = (int)tempPos.charAt(0)-97;
+			xPosInNum = (int)tempPos.charAt(0)-96;
 			yPosInNum = (int)tempPos.charAt(1);
 			chessPiecesPosition[yPosInNum][xPosInNum] = c.toString();
 		}
