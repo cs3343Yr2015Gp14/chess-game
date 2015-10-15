@@ -95,6 +95,22 @@ public class ChessMonitoringSystem {
 	 * @param playerId
 	 * Chesspiece target;
 		
+	
+	 */
+	 
+	private boolean isDestinationValid(Chesspiece o ,String move) {
+		for(Chesspiece c: allChessPieces)
+			if(c.getPosition()==move)
+				if(c.getPlayer()!=o.getPlayer())
+					return true;
+				else
+					return false;
+	}
+	
+	
+	public void moveChessPiece(String input, String move, ChessPlayer player) {
+		// TODO - implement ChessMonitoringSystem.moveChessPiece
+		
 		for(Chesspiece c : allChessPieces) {
 			if(this.position == input)
 				target = c;
@@ -105,13 +121,14 @@ public class ChessMonitoringSystem {
 		else if(target.getPlayer() != player)
           		system.out.println("Selected piece does not belong to you!");
 		else if(target.moveIsAvailable(move))
-          		target.updatePosition(move);
+			if(isDestinationValid(target, move))
+          			target.updatePosition(move);
+          		else
+          			system.out.println("Move invalid: destination occupied by your other chess");
         	else
           		system.out.println("The move is invalid.");
-	 */
-	 
-	public void moveChessPiece(String input, String move, ChessPlayer player) {
-		// TODO - implement ChessMonitoringSystem.moveChessPiece
+          		
+          		
 		throw new UnsupportedOperationException();
 	}
 
