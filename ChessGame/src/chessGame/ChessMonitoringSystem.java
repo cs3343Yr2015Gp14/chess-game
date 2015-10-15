@@ -93,8 +93,24 @@ public class ChessMonitoringSystem {
 	 * 
 	 * @param move
 	 * @param playerId
+	 * Chesspiece target;
+		
+		for(Chesspiece c : allChessPieces) {
+			if(this.position == input)
+				target = c;
+		}
+
+		if(target == null)
+			system.out.println("Chesspiece not found!");
+		else if(target.getPlayer() != player)
+          		system.out.println("Selected piece does not belong to you!");
+		else if(target.moveIsAvailable(move))
+          		target.updatePosition(move);
+        	else
+          		system.out.println("The move is invalid.");
 	 */
-	public void moveChessPiece(String move, ChessPlayer player) {
+	 
+	public void moveChessPiece(String input, String move, ChessPlayer player) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		throw new UnsupportedOperationException();
 	}
