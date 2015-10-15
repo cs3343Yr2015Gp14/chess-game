@@ -69,7 +69,7 @@ public class ChessMonitoringSystem {
 		for (ChessPiece c: allChessPieces)
 		{
 			tempPos = c.getPosition();
-			xPosInNum = (int)tempPos.charAt(0)-97;
+			xPosInNum = (int)tempPos.charAt(0)-96;
 			yPosInNum = (int)tempPos.charAt(1);
 			chessPiecesPosition[yPosInNum][xPosInNum] = c.toString();
 		}
@@ -96,9 +96,22 @@ public class ChessMonitoringSystem {
 	 */
 	public void moveChessPiece(String move, ChessPlayer player) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
+		// check move Is Available
 		throw new UnsupportedOperationException();
 	}
 
+	
+	public ChessPiece getChessPiece(String position){
+		// TODO - implement ChessMonitoringSystem.getChessPiece
+
+		
+		
+		
+		
+	}
+	
+	
+	
 	private boolean chessPieceIsCaptured() {
 		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
 		throw new UnsupportedOperationException();

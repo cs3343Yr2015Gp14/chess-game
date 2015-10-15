@@ -2,7 +2,7 @@ package chessGame;
 
 public class ChessPlayer {
 
-	private String id;
+	private int id;
 	private String name;
 	/**
 	 * 
