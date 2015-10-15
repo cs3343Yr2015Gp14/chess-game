@@ -98,13 +98,24 @@ public class ChessMonitoringSystem {
 	
 	 */
 	 
-	private boolean isDestinationValid(Chesspiece o ,String move) {
+	private boolean isDestinationOccupied(String move) {
 		for(Chesspiece c: allChessPieces)
-			if(c.getPosition()==move)
-				if(c.getPlayer()!=o.getPlayer())
+			if(c.getPosition().equals(move))
+				return true;
+			else
+				return false;
+	}
+	
+	private boolean isChessCaptured(Chesspiece target, String move) {
+		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
+		for(Chesspiece c: allChessPieces)
+			if(c.getPosition().equals(move))
+				if(target.getPlayer()!=c.getPlayer())
 					return true;
 				else
 					return false;
+		
+		throw new UnsupportedOperationException();
 	}
 	
 	
@@ -112,19 +123,21 @@ public class ChessMonitoringSystem {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		
 		for(Chesspiece c : allChessPieces) {
-			if(this.position == input)
+			if(c.position.equals(input))
 				target = c;
 		}
-
+		//error catching
 		if(target == null)
 			system.out.println("Chesspiece not found!");
-		else if(target.getPlayer() != player)
+		else if(!target.getPlayer().equals(player))
           		system.out.println("Selected piece does not belong to you!");
 		else if(target.moveIsAvailable(move))
-			if(isDestinationValid(target, move))
+			if(!isDestinationOccupied(move))
           			target.updatePosition(move);
-          		else
-          			system.out.println("Move invalid: destination occupied by your other chess");
+          		else if(isChessCaptured(Chesspiece target, String move)) {
+          			removeChessPiece(move);
+          			target.updatePosition(move);	
+          		}
         	else
           		system.out.println("The move is invalid.");
           		
@@ -132,10 +145,7 @@ public class ChessMonitoringSystem {
 		throw new UnsupportedOperationException();
 	}
 
-	private boolean chessPieceIsCaptured() {
-		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
-		throw new UnsupportedOperationException();
-	}
+	
 
 	/**
 	 * 
@@ -143,11 +153,23 @@ public class ChessMonitoringSystem {
 	 */
 	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
+		for(Chesspiece c: allChessPieces)
+			if(c.getPosition().equals(position)) {
+				if(c.getClass().equals("King"))
+					checkGameResult(c);
+				
+				allChessPieces.remove(c);
+			}
+				
+		
 		throw new UnsupportedOperationException();
 	}
 
-	public void checkGameResult() {
+	public void checkGameResult(Chesspiece king) {
 		// TODO - implement ChessMonitoringSystem.checkGameResult
+		String loser = king.getPlayer();
+		System.out.printf("Player %s lost!", king.toString());
+		
 		throw new UnsupportedOperationException();
 	}
 
