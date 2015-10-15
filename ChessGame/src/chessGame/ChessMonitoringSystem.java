@@ -105,7 +105,13 @@ public class ChessMonitoringSystem {
 
 	
 	public ChessPiece getChessPiece(String position){
-		// TODO - implement ChessMonitoringSystem.getChessPiece
+		String tempChessPos = null;
+		for (ChessPiece c: allChessPieces)
+		{
+			tempChessPos = c.getPosition();
+			if (tempChessPos.equals(position))
+				return c;
+		}
 		return null;
 	}
 	
