@@ -96,9 +96,22 @@ public class ChessMonitoringSystem {
 	 */
 	public void moveChessPiece(String move, ChessPlayer player) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
+		// check move Is Available
 		throw new UnsupportedOperationException();
 	}
 
+	
+	public ChessPiece getChessPiece(String position){
+		// TODO - implement ChessMonitoringSystem.getChessPiece
+
+		
+		
+		
+		
+	}
+	
+	
+	
 	private boolean chessPieceIsCaptured() {
 		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
 		throw new UnsupportedOperationException();
