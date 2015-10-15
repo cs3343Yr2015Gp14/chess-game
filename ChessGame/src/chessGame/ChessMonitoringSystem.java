@@ -24,31 +24,31 @@ public class ChessMonitoringSystem {
 		allChessPieces = new ChessPiece[32];
 		ChessPlayer[] chessPlayerList = {player1, player2};
 		
-		int initialPosition = 1;
-		int pawnPos = 2;
+		int allChessYPos = 1;
+		int pawnYPos = 2;
 		
 		for (int i = 0; i<2; i++)
 		{
-			allChessPieces[i*16] = new Rook(chessPlayerList[i], "a"+initialPosition);
-			allChessPieces[i*16+1] = new Knight(chessPlayerList[i], "b"+initialPosition);
-			allChessPieces[i*16+2] = new Bishop(chessPlayerList[i], "c"+initialPosition);
-			allChessPieces[i*16+3] = new King(chessPlayerList[i], "d"+initialPosition);
-			allChessPieces[i*16+4] = new Queen(chessPlayerList[i], "e"+initialPosition);
-			allChessPieces[i*16+5] = new Bishop(chessPlayerList[i], "f"+initialPosition);
-			allChessPieces[i*16+6] = new Knight(chessPlayerList[i], "g"+initialPosition);
-			allChessPieces[i*16+7] = new Rook(chessPlayerList[i], "h"+initialPosition);
+			allChessPieces[i*16] = new Rook(chessPlayerList[i], "a"+allChessYPos);
+			allChessPieces[i*16+1] = new Knight(chessPlayerList[i], "b"+allChessYPos);
+			allChessPieces[i*16+2] = new Bishop(chessPlayerList[i], "c"+allChessYPos);
+			allChessPieces[i*16+3] = new King(chessPlayerList[i], "d"+allChessYPos);
+			allChessPieces[i*16+4] = new Queen(chessPlayerList[i], "e"+allChessYPos);
+			allChessPieces[i*16+5] = new Bishop(chessPlayerList[i], "f"+allChessYPos);
+			allChessPieces[i*16+6] = new Knight(chessPlayerList[i], "g"+allChessYPos);
+			allChessPieces[i*16+7] = new Rook(chessPlayerList[i], "h"+allChessYPos);
 			
 			//8 pawns		
 			int xPosCharCode = 97;
 			for (int j = 0; j<8; j++)
 			{
-				String xPawnPos= ""+(char)xPosCharCode; //x-coordinate of pawns' position
-				allChessPieces[i*16+8+j] = new Pawn(chessPlayerList[i], xPawnPos+pawnPos);
+				String pawnXPos= ""+(char)xPosCharCode; //x-coordinate of pawns' position
+				allChessPieces[i*16+8+j] = new Pawn(chessPlayerList[i], pawnXPos+pawnYPos);
 				xPosCharCode++;
 			}
 			
-			pawnPos = 7; //inverted y-coordinate for Pawns
-			initialPosition = 8; //invert y-coordinate for oponent's chess pieces
+			pawnYPos = 7; //inverted y-coordinate for Pawns
+			allChessYPos = 8; //invert y-coordinate for oponent's chess pieces
 		}
 		
 		throw new UnsupportedOperationException();
@@ -71,20 +71,23 @@ public class ChessMonitoringSystem {
 			tempPos = c.getPosition();
 			xPosInNum = (int)tempPos.charAt(0)-96;
 			yPosInNum = (int)tempPos.charAt(1);
-			chessPiecesPosition[yPosInNum][xPosInNum] = c.toString();
+			chessPiecesPosition[yPosInNum-1][xPosInNum-1] = c.toString(); //a1 on chess board->[0][0] in array
 		}
 		
-		System.out.println("  a b c d e f g h");
+		System.out.println(String.format("%2s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
 
 		for (int i = 0; i<8; i++)
 		{
-			System.out.print(i+1+" ");
+			System.out.print((8-i)+" ");
 			for (int j = 0; j<8; j++)
 			{
-				System.out.print(chessPiecesPosition[i][j]);
+				System.out.print(chessPiecesPosition[8-i-1][j-1]+" "); //yPos: 8,7,6,...->7,6,5,...  
+																		//xPos: a,b,c,...->0,1,2,...
 			}
-			System.out.println();
+			System.out.println(8-i);
 		}
+		
+		System.out.println(String.format("%2s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
 		
 		throw new UnsupportedOperationException();
 	}
@@ -103,11 +106,7 @@ public class ChessMonitoringSystem {
 	
 	public ChessPiece getChessPiece(String position){
 		// TODO - implement ChessMonitoringSystem.getChessPiece
-
-		
-		
-		
-		
+		return null;
 	}
 	
 	
