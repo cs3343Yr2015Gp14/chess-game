@@ -167,9 +167,16 @@ public class ChessMonitoringSystem {
 
 	public void checkGameResult(Chesspiece king) {
 		// TODO - implement ChessMonitoringSystem.checkGameResult
-		String loser = king.getPlayer();
-		System.out.printf("Player %s lost!", king.toString());
+
+		chessPlayer loser = king.getPlayer();
+		chessPlayer winner;
 		
+		for(chessPlayer o: chessPlayersList)
+			if(o!=loser)
+				winner = o;
+				
+		System.out.printf("Player %s won!", winner.toString());
+
 		throw new UnsupportedOperationException();
 	}
 
