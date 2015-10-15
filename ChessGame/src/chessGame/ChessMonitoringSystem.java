@@ -46,7 +46,7 @@ public class ChessMonitoringSystem {
 				allChessPieces[i*16+8+j] = new Pawn(chessPlayerList[i], xPawnPos+pawnPos);
 				xPosCharCode++;
 			}
-			
+			555
 			pawnPos = 7; //inverted y-coordinate for Pawns
 			initialPosition = 8; //invert y-coordinate for oponent's chess pieces
 		}
@@ -99,16 +99,16 @@ public class ChessMonitoringSystem {
 	 */
 	 
 	private boolean isDestinationOccupied(String move) {
-		for(Chesspiece c: allChessPieces)
+		for(ChessPiece c: allChessPieces)
 			if(c.getPosition().equals(move))
 				return true;
 			else
 				return false;
 	}
 	
-	private boolean isChessCaptured(Chesspiece target, String move) {
+	private boolean isChessCaptured(ChessPiece target, String move) {
 		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
-		for(Chesspiece c: allChessPieces)
+		for(ChessPiece c: allChessPieces)
 			if(c.getPosition().equals(move))
 				if(target.getPlayer()!=c.getPlayer())
 					return true;
@@ -122,20 +122,22 @@ public class ChessMonitoringSystem {
 	public void moveChessPiece(String input, String move, ChessPlayer player) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		
-		for(Chesspiece c : allChessPieces) {
-			if(c.position.equals(input))
+		ChessPiece target;
+		
+		for(ChessPiece c : allChessPieces) {
+			if(c.getPosition().equals(input))
 				target = c;
 		}
 		//error catching
 		if(target == null)
-			system.out.println("Chesspiece not found!");
-		else if(!target.getPlayer().equals(player))
-          		system.out.println("Selected piece does not belong to you!");
+			System.out.println("Chesspiece not found!");
+		else if(target.getPlayer()!=(player))
+          		System.out.println("Selected piece does not belong to you!");
 		else if(target.moveIsAvailable(move))
 			if(!isDestinationOccupied(move))
           			target.updatePosition(move);
-          		else if(isChessCaptured(Chesspiece target, String move)) {
-          			removeChessPiece(move);
+          		else if(isChessCaptured(target, move)) {
+          			removeChessPiece(move, player);
           			target.updatePosition(move);	
           		}
         	else
@@ -151,12 +153,12 @@ public class ChessMonitoringSystem {
 	 * 
 	 * @param position
 	 */
-	private void removeChessPiece(String position) {
+	private void removeChessPiece(String position, ChessPlayer player) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
-		for(Chesspiece c: allChessPieces)
+		for(ChessPiece c: allChessPieces)
 			if(c.getPosition().equals(position)) {
-				if(c.getClass().equals("King"))
-					checkGameResult(c);
+				if(c instanceof King)
+					checkGameResult(c, player);
 				
 				allChessPieces.remove(c);
 			}
@@ -165,16 +167,9 @@ public class ChessMonitoringSystem {
 		throw new UnsupportedOperationException();
 	}
 
-	public void checkGameResult(Chesspiece king) {
+	public void checkGameResult(ChessPiece king, ChessPlayer winner) {
 		// TODO - implement ChessMonitoringSystem.checkGameResult
 
-		chessPlayer loser = king.getPlayer();
-		chessPlayer winner;
-		
-		for(chessPlayer o: chessPlayersList)
-			if(o!=loser)
-				winner = o;
-				
 		System.out.printf("Player %s won!", winner.toString());
 
 		throw new UnsupportedOperationException();
