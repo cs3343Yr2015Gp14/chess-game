@@ -8,16 +8,16 @@ public class Main {
 		Scanner in=new Scanner(System.in);
 		ChessMonitoringSystem chessMonitoringSystem=ChessMonitoringSystem.getInstance();
 
-                System.out.println("Please choose a mode (1- Classic 2- Scoring): ");
-                int mode=in.nextInt();
-                in.nextLine();
+        System.out.println("Please choose a mode (1- Classic 2- Scoring): ");
+        int mode=in.nextInt();
+        in.nextLine();
 		
 		int numOfPlayer=2;
 		ChessPlayer[] players=new ChessPlayer[numOfPlayer];
 		for (int i=0;i<numOfPlayer;i++){
 			System.out.print("Player "+i+1+" name: ");
 			String pName=in.nextLine();
-			ChessPlayer player=new ChessPlayer(pName); //constructor : ChessPlayer(String playerName)
+			ChessPlayer player=new ChessPlayer(pName,i);
 			players[i]=player;
 		}
 //		chessMonitoringSystem.initializeChessBoard();
