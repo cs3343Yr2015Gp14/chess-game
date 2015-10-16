@@ -6,9 +6,15 @@ public class King extends ChessPiece {
 		super(player, position);	
 	}
 
-	public boolean moveIsAvailable(String move) {	
+	public boolean moveIsAvailable(String moveTo) {	
 		
-		// Exception out of the board scope 
+		// TO-DO: add Exception out of the board scope 
+		
+		if((int)position.charAt(0)==(int)move.charAt(1) && Math.abs((int)position.charAt(1)-(int)move.charAt(2))==1)
+		
+		
+		
+		
 		
 		if(this.position relative to position)
 		

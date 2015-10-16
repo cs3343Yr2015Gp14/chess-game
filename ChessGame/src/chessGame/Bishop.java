@@ -2,20 +2,11 @@ package chessGame;
 
 public class Bishop extends ChessPiece {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Bishop(String id) {
-		// TODO - implement Bishop.Bishop
-		throw new UnsupportedOperationException();
+	public Bishop(ChessPlayer player, String position) {
+		super(player, position);	
 	}
-
-	/**
-	 * 
-	 * @param move
-	 */
-	public boolean moveIsAvailable(String move) {
+	
+	public boolean moveIsAvailable(String moveTo) {
 		// TODO - implement Bishop.moveIsAvailable
 		throw new UnsupportedOperationException();
 	}

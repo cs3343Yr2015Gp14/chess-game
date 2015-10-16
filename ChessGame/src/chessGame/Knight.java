@@ -2,20 +2,11 @@ package chessGame;
 
 public class Knight extends ChessPiece {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Knight(String id) {
-		// TODO - implement Knight.Knight
-		throw new UnsupportedOperationException();
+	public Knight(ChessPlayer player, String position) {
+		super(player, position);	
 	}
-
-	/**
-	 * 
-	 * @param move
-	 */
-	public boolean moveIsAvailable(String move) {
+	
+	public boolean moveIsAvailable(String moveTo) {
 		// TODO - implement Knight.moveIsAvailable
 		throw new UnsupportedOperationException();
 	}

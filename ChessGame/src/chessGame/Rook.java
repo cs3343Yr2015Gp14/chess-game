@@ -2,20 +2,11 @@ package chessGame;
 
 public class Rook extends ChessPiece {
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Rook(String id) {
-		// TODO - implement Rook.Rook
-		throw new UnsupportedOperationException();
+	public Rook(ChessPlayer player, String position) {
+		super(player, position);	
 	}
 
-	/**
-	 * 
-	 * @param move
-	 */
-	public boolean moveIsAvailable(String move) {
+	public boolean moveIsAvailable(String moveTo) {
 		// TODO - implement Rook.moveIsAvailable
 		throw new UnsupportedOperationException();
 		

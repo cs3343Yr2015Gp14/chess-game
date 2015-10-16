@@ -92,19 +92,15 @@ public class ChessMonitoringSystem {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param move
-	 * @param playerId
-	 */
 	public void moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		//call getChessPiece to find the chess first
 		// check move Is Available
+		
+		//update the newPos of chessPiece
 		throw new UnsupportedOperationException();
 	}
 
-	
 	public ChessPiece getChessPiece(String position){
 		String tempChessPos = null;
 		for (ChessPiece c: allChessPieces)
