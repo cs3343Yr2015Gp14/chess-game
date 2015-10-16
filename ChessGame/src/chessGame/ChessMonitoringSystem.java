@@ -168,7 +168,8 @@ public class ChessMonitoringSystem {
 
 	public void getGameResult(int mode) {
 		// TODO Auto-generated method stub
-		
+		//player.getPlayerScore()
+		//player.getPlayerName()
 	}
 
 }
