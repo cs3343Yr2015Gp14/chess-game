@@ -93,11 +93,26 @@ public class ChessMonitoringSystem {
 	}
 
 	public void moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
-		// TODO - implement ChessMonitoringSystem.moveChessPiece
-		//call getChessPiece to find the chess first
-		// check move Is Available
+		/*----------------------------------------------
+		 * BELOW CODE DO ONLY ILLUSTRATE THE CONCEPT
+		 *----------------------------------------------*/
 		
-		//update the newPos of chessPiece
+		
+		ChessPiece origin = getChessPiece(oldPos);
+		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
+		if(origin == null)
+			System.out.println("Chesspiece not found!");
+		else if(origin.getPlayer()!=player)
+      			System.out.println("Selected piece does not belong to you!");
+		else if(origin.moveIsAvailable(newPos)) {
+			if(getChessPiece(newPos)!=null)
+				removeChessPiece(newPos);
+			origin.updatePosition(newPos);
+		}
+        	else
+          		System.out.println("The move is invalid.");
+		
+		//updated the newPos of chessPiece
 		throw new UnsupportedOperationException();
 	}
 
@@ -114,23 +129,32 @@ public class ChessMonitoringSystem {
 	
 	
 	
-	private boolean chessPieceIsCaptured() {
+	/*Stub
+	private boolean isChessPieceCaptured(ChessPiece origin,String position) {
 		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
-		throw new UnsupportedOperationException();
+		ChessPiece target = getChessPiece(position);
+		
+		if(origin.getPlayer()!=target.getPlayer())
+			return true;
+		else
+			return false;
 	}
+	*/
 
-	/**
-	 * 
-	 * @param position
-	 */
 	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
-		throw new UnsupportedOperationException();
+		ChessPiece target = getChessPiece(position);
+		if(target instanceof King)
+			checkGameResult(target.getPlayer());
+			
+		allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
 
-	public void checkGameResult() {
-		// TODO - implement ChessMonitoringSystem.checkGameResult
-		throw new UnsupportedOperationException();
+	public void checkGameResult(ChessPlayer winner) {
+		// TODO - Possible Gamemode conditions
+		//if(getGameMode());
+		System.out.printf("Player %s won!", winner.toString());
+
 	}
 
 	public boolean isKingCaptured() {
