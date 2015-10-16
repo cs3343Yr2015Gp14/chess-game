@@ -98,16 +98,16 @@ public class ChessMonitoringSystem {
 		 *----------------------------------------------*/
 		
 		
-		ChessPiece origin = getChessPiece(oldPos);
+		ChessPiece movingChess = getChessPiece(oldPos);
 		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
-		if(origin == null)
+		if(movingChess == null)
 			System.out.println("Chesspiece not found!");
-		else if(origin.getPlayer()!=player)
+		else if(movingChess.getPlayer()!=player)
       			System.out.println("Selected piece does not belong to you!");
-		else if(origin.moveIsAvailable(newPos)) {
+		else if(movingChess.moveIsAvailable(newPos)) {
 			if(getChessPiece(newPos)!=null)
 				removeChessPiece(newPos);
-			origin.updatePosition(newPos);
+			movingChess.updatePosition(newPos);
 		}
         	else
           		System.out.println("The move is invalid.");
