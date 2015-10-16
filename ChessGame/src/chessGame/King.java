@@ -30,8 +30,8 @@ public class King extends ChessPiece {
 					Math.abs((int)position.charAt(0)-(int)moveTo.charAt(0))==1)
 				return true;
 		} 
+		
 		return false;
-
 	}
 
 }
