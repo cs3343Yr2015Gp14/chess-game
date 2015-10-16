@@ -1,7 +1,7 @@
 package chessGame;
 
 public class King extends ChessPiece {
-	
+	private final int score=0;
 	
 	public King(ChessPlayer player, String position) {
 		super(player, position);	
@@ -32,6 +32,21 @@ public class King extends ChessPiece {
 		} 
 		
 		return false;
+	}
+
+	@Override
+	public int getScore() {
+		return score;
+	}
+	
+	@Override
+	public String toString(){
+		if (player.getPlayerId()==1)
+			return "K";
+		else if (player.getPlayerId()==2)
+			return "k";
+		else
+			return null;
 	}
 
 }

@@ -2,6 +2,8 @@ package chessGame;
 
 public class Knight extends ChessPiece {
 
+	private final int score=0;;
+	
 	public Knight(ChessPlayer player, String position) {
 		super(player, position);	
 	}
@@ -25,4 +27,17 @@ public class Knight extends ChessPiece {
 		return false;
 	}
 
+	public int getScore(){
+		return score;
+	}
+
+	@Override
+	public String toString(){
+		if (player.getPlayerId()==1)
+			return "N";
+		else if (player.getPlayerId()==2)
+			return "n";
+		else
+			return null;
+	}
 }

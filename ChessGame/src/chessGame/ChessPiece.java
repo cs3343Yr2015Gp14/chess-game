@@ -24,4 +24,8 @@ public abstract class ChessPiece {
 		this.position = move;
 	}
 	
+	public abstract int getScore();
+	
+	@Override
+	public abstract String toString();
 }

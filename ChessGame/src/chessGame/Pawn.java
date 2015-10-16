@@ -3,6 +3,7 @@ package chessGame;
 public class Pawn extends ChessPiece {
 	private static final int initialYPos1 = 2;
 	private static final int initialYPos2 = 7;
+	private final int score=0;
 	
 	public Pawn(ChessPlayer player, String position) {
 		super(player, position);	
@@ -33,5 +34,18 @@ public class Pawn extends ChessPiece {
 		
 		return false;
 	}
-
+	
+	public int getScore(){
+		return score;
+	}
+	
+	@Override
+	public String toString(){
+		if (player.getPlayerId()==1)
+			return "P";
+		else if (player.getPlayerId()==2)
+			return "p";
+		else
+			return null;
+	}
 }
