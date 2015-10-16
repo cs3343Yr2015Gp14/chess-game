@@ -73,7 +73,6 @@ public class ChessMonitoringSystem {
 		for (ChessPiece c: allChessPieces)
 		{
 			tempPos = c.getPosition();
-			System.out.println(tempPos);
 			xPosInNum = tempPos.charAt(0)-96;
 			yPosInNum = tempPos.charAt(1)-48;
 			chessPiecesPosition[yPosInNum-1][xPosInNum-1] = c.toString(); //a1 on chess board->[0][0] in array
