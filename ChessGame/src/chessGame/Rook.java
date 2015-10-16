@@ -7,8 +7,26 @@ public class Rook extends ChessPiece {
 	}
 
 	public boolean moveIsAvailable(String moveTo) {
-		// TODO - implement Rook.moveIsAvailable
-		throw new UnsupportedOperationException();
+		// TO-DO: add Exception out of the board scope 
+		// throw new UnsupportedOperationException();
+		// TO-DO: Exception own chess
+		
+		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();
+		if(CMS.getChessPiece(moveTo)==null || 
+				CMS.getChessPiece(moveTo).getPlayer()!=this.player)
+		{
+			
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
 		
 		//a1a2 vertical move
 		if((int)position.charAt(0)==(int)move.charAt(1))

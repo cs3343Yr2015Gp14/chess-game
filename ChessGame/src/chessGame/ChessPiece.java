@@ -2,8 +2,8 @@ package chessGame;
 
 public abstract class ChessPiece {
 
-	private String position;
-	private ChessPlayer player;
+	protected String position;
+	protected ChessPlayer player;
 	
 	public ChessPiece(ChessPlayer player, String position){
 		this.player=player;
