@@ -9,6 +9,11 @@ public class ChessPlayer {
 	public ChessPlayer(String playerName,int id) {
 		this.name=playerName;
 		this.id=id;
+		playerScore=0;
+	}
+	
+	public void addScore(int score){
+		playerScore+=score;
 	}
 	
 	public int getPlayerScore(){
@@ -19,7 +24,8 @@ public class ChessPlayer {
 		return id;
 	}
 	
-	public String getPlayerName(){
+	@Override
+	public String toString(){
 		return name;
 	}
 

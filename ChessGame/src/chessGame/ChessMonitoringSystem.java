@@ -110,6 +110,7 @@ public class ChessMonitoringSystem {
       			System.out.println("Selected piece does not belong to you!");
 		else if(movingChess.moveIsAvailable(newPos)) {
 			if(getChessPiece(newPos)!=null)
+				player.addScore(getChessPiece(newPos).getScore());
 				removeChessPiece(newPos);
 			movingChess.updatePosition(newPos);
 		}
