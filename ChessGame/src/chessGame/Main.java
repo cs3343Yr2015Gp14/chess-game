@@ -7,6 +7,10 @@ public class Main {
 	public void main(String[] args) {
 		Scanner in=new Scanner(System.in);
 		ChessMonitoringSystem chessMonitoringSystem=new ChessMonitoringSystem();
+
+                System.out.println("Please choose a mode (1- Classic 2- Scoring): ");
+                int mode=in.nextInt();
+                in.nextLine();
 		
 		int numOfPlayer=2;
 		ChessPlayer[] players=new ChessPlayer[numOfPlayer];
@@ -26,12 +30,13 @@ public class Main {
 			System.out.println("Please enter the new position: ");
 			String newPos=in.nextLine();
 			ChessMonitoringSystem.getInstance().moveChessPieces(player[i],oldPos,newPos);
+                        ChessMonitoringSystem.getInstance().showAllChessPiecesPosition();
 			if (j==0)
 				j++;
 			else
 				j--;
-		}while(!ChessMonitoringSystem.getInstance().checkGameResult());   //boolean checkGameResult(): one player win/ draw->return true
-		ChessMonitoringSystem.getInstance().getGameResult();  //void getGameResult(): println("Player 1/2 Win" / "Draw")
+		}while(!ChessMonitoringSystem.getInstance().isKingCaptured());   //Check if King is captured
+		ChessMonitoringSystem.getInstance().getGameResult(mode);
 		
 		in.close();
 		
