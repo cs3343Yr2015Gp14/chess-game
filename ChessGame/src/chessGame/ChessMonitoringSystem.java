@@ -97,8 +97,9 @@ public class ChessMonitoringSystem {
 	 * @param move
 	 * @param playerId
 	 */
-	public void moveChessPiece(String move, ChessPlayer player) {
+	public void moveChessPiece(ChessPlayer player[i],String oldPos,String newPos) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
+		//call getChessPiece to find the chess first
 		// check move Is Available
 		throw new UnsupportedOperationException();
 	}
