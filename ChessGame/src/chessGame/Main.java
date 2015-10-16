@@ -21,10 +21,11 @@ public class Main {
 		ChessMonitoringSystem.getInstance().showAllChessPiecesPosition();
 		int j=0;
 		do{
-			System.out.println("ChessType: (K-King, Q-Queen, R-Rook, N-Knight, B-Bishop, P-Pawn)");
-			System.out.println("Please enter action: e.g. P11, N76");
-			String move=in.nextLine();
-			ChessMonitoringSystem.getInstance().moveChessPieces(player[j],move);
+			System.out.println("Please enter the position of the chess pience you want to move: ");
+			String oldPos=in.nextLine();
+			System.out.println("Please enter the new position: ");
+			String newPos=in.nextLine();
+			ChessMonitoringSystem.getInstance().moveChessPieces(player[i],oldPos,newPos);
 			if (j==0)
 				j++;
 			else
