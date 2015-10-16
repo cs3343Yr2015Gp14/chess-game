@@ -7,11 +7,15 @@ public class ChessMonitoringSystem {
 
 	private ChessMonitoringSystem() {
 		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
-		throw new UnsupportedOperationException();
+		
+//		throw new UnsupportedOperationException();
 	}
 
 	public static ChessMonitoringSystem getInstance() {
-		return instance;
+		if (instance==null)
+			instance = new ChessMonitoringSystem();
+		
+		return instance; 
 	}
 
 	public void initializeChessBoard() {
@@ -51,7 +55,7 @@ public class ChessMonitoringSystem {
 			allChessYPos = 8; //invert y-coordinate for oponent's chess pieces
 		}
 		
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
 	}
 
 	public void showAllChessPiecesPosition() {
@@ -69,27 +73,28 @@ public class ChessMonitoringSystem {
 		for (ChessPiece c: allChessPieces)
 		{
 			tempPos = c.getPosition();
-			xPosInNum = (int)tempPos.charAt(0)-96;
-			yPosInNum = (int)tempPos.charAt(1);
+			System.out.println(tempPos);
+			xPosInNum = tempPos.charAt(0)-96;
+			yPosInNum = tempPos.charAt(1)-48;
 			chessPiecesPosition[yPosInNum-1][xPosInNum-1] = c.toString(); //a1 on chess board->[0][0] in array
 		}
 		
-		System.out.println(String.format("%2s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
+		System.out.println(String.format("%3s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
 
 		for (int i = 0; i<8; i++)
 		{
 			System.out.print((8-i)+" ");
 			for (int j = 0; j<8; j++)
 			{
-				System.out.print(chessPiecesPosition[8-i-1][j-1]+" "); //yPos: 8,7,6,...->7,6,5,...  
+				System.out.print(chessPiecesPosition[8-i-1][j]+" "); //yPos: 8,7,6,...->7,6,5,...  
 																		//xPos: a,b,c,...->0,1,2,...
 			}
 			System.out.println(8-i);
 		}
 		
-		System.out.println(String.format("%2s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
+		System.out.println(String.format("%3s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
 		
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
 	}
 
 	public void moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
@@ -147,7 +152,7 @@ public class ChessMonitoringSystem {
 		if(target instanceof King)
 			checkGameResult(target.getPlayer());
 			
-		allChessPieces.remove(target); //IF USE ARRAYLIST
+//		allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
 
 	public void checkGameResult(ChessPlayer winner) {

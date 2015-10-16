@@ -20,7 +20,7 @@ public class Main {
 			ChessPlayer player=new ChessPlayer(pName); //constructor : ChessPlayer(String playerName)
 			players[i]=player;
 		}
-		chessMonitoringSystem.initializeChessBoard();
+//		chessMonitoringSystem.initializeChessBoard();
 		chessMonitoringSystem.initializeChessPieces(players[0],players[1]);
 		chessMonitoringSystem.showAllChessPiecesPosition();
 		int j=0;
