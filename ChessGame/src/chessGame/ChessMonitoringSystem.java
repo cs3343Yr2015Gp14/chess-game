@@ -14,7 +14,7 @@ public class ChessMonitoringSystem {
 		return instance;
 	}
 
-	public void initializeChessboard() {
+	public void initializeChessBoard() {
 		// TODO - implement ChessMonitoringSystem.initializeChessboard
 		throw new UnsupportedOperationException();
 	}
@@ -97,7 +97,7 @@ public class ChessMonitoringSystem {
 	 * @param move
 	 * @param playerId
 	 */
-	public void moveChessPiece(ChessPlayer player[i],String oldPos,String newPos) {
+	public void moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
 		// TODO - implement ChessMonitoringSystem.moveChessPiece
 		//call getChessPiece to find the chess first
 		// check move Is Available
@@ -135,6 +135,16 @@ public class ChessMonitoringSystem {
 	public void checkGameResult() {
 		// TODO - implement ChessMonitoringSystem.checkGameResult
 		throw new UnsupportedOperationException();
+	}
+
+	public boolean isKingCaptured() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void getGameResult(int mode) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -6,7 +6,7 @@ public class Main {
 	
 	public void main(String[] args) {
 		Scanner in=new Scanner(System.in);
-		ChessMonitoringSystem chessMonitoringSystem=new ChessMonitoringSystem();
+		ChessMonitoringSystem chessMonitoringSystem=ChessMonitoringSystem.getInstance();
 
                 System.out.println("Please choose a mode (1- Classic 2- Scoring): ");
                 int mode=in.nextInt();
@@ -20,23 +20,23 @@ public class Main {
 			ChessPlayer player=new ChessPlayer(pName); //constructor : ChessPlayer(String playerName)
 			players[i]=player;
 		}
-		ChessMonitoringSystem.getInstance().initializeChessBoard();
-		ChessMonitoringSystem.getInstance().initializeChessPieces();
-		ChessMonitoringSystem.getInstance().showAllChessPiecesPosition();
+		chessMonitoringSystem.initializeChessBoard();
+		chessMonitoringSystem.initializeChessPieces(players[0],players[1]);
+		chessMonitoringSystem.showAllChessPiecesPosition();
 		int j=0;
 		do{
 			System.out.println("Please enter the position of the chess pience you want to move: ");
 			String oldPos=in.nextLine();
 			System.out.println("Please enter the new position: ");
 			String newPos=in.nextLine();
-			ChessMonitoringSystem.getInstance().moveChessPieces(player[i],oldPos,newPos);
-                        ChessMonitoringSystem.getInstance().showAllChessPiecesPosition();
+			chessMonitoringSystem.moveChessPiece(players[j],oldPos,newPos);
+			chessMonitoringSystem.showAllChessPiecesPosition();
 			if (j==0)
 				j++;
 			else
 				j--;
-		}while(!ChessMonitoringSystem.getInstance().isKingCaptured());   //Check if King is captured
-		ChessMonitoringSystem.getInstance().getGameResult(mode);
+		}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
+		chessMonitoringSystem.getGameResult(mode);
 		
 		in.close();
 		
