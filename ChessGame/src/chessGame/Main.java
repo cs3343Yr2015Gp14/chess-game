@@ -15,9 +15,9 @@ public class Main {
 		int numOfPlayer=2;
 		ChessPlayer[] players=new ChessPlayer[numOfPlayer];
 		for (int i=0;i<numOfPlayer;i++){
-			System.out.print("Player "+i+1+" name: ");
+			System.out.print("Player "+(i+1)+" name: ");
 			String pName=in.nextLine();
-			ChessPlayer player=new ChessPlayer(pName,i);
+			ChessPlayer player=new ChessPlayer(pName,i+1);
 			players[i]=player;
 		}
 //		chessMonitoringSystem.initializeChessBoard();

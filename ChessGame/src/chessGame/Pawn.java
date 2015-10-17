@@ -16,8 +16,7 @@ public class Pawn extends ChessPiece {
 		// TO-DO: Exception own chess
 		
 		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();
-		if(CMS.getChessPiece(moveTo)==null || 
-				CMS.getChessPiece(moveTo).getPlayer()!=this.player)
+		if(CMS.getChessPiece(moveTo)==null)
 		{
 			//special move at initial position
 			if (position.charAt(1)==initialYPos1 ||
@@ -30,6 +29,25 @@ public class Pawn extends ChessPiece {
 			//other moves
 			if (Math.abs(moveTo.charAt(1)-position.charAt(1))==1) 
 					return true;
+		}
+		else 
+		{
+			//pawn can only capture pieces in the front diagonally
+			if (CMS.getChessPiece(moveTo).getPlayer()!=this.player) 
+			{
+				int playerId = CMS.getChessPiece(moveTo).getPlayer().getPlayerId();
+				int xPosDiff = moveTo.charAt(0)-position.charAt(0);
+				int yPosDiff = moveTo.charAt(1)-position.charAt(1);
+				boolean isValidPosDiff = Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==1; //x and y position diff. in 1
+				if (isValidPosDiff)
+				{
+					if ((playerId==1 && yPosDiff>0) ||	//player1's pawn: new yPos always larger  
+						(playerId==2 && yPosDiff<0))	//player2's pawn: new yPos always smaller
+						return true;
+					else 
+						return false;
+				}
+			}
 		}
 		
 		return false;
