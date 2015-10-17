@@ -6,7 +6,8 @@ public class King extends ChessPiece {
 	public King(ChessPlayer player, String position) {
 		super(player, position);	
 	}
-
+	
+	@Override
 	public boolean moveIsAvailable(String moveTo) {	
 		 
 		// TO-DO: add Exception out of the board scope 
