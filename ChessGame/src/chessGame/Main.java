@@ -25,7 +25,12 @@ public class Main {
 		chessMonitoringSystem.showAllChessPiecesPosition();
 		int j=0;
 		do{
-			System.out.println("Please enter the position of the chess pience you want to move: ");
+			System.out.print("Player "+(j+1)+", ");
+			if (j==0)
+				System.out.println("Your chess pieces are in UPPER-CASE.");
+			else
+				System.out.println("Your chess pieces are in lower-case.");
+			System.out.println("Please enter the position of the chess piece you want to move: ");
 			String oldPos=in.nextLine();
 			System.out.println("Please enter the new position: ");
 			String newPos=in.nextLine();

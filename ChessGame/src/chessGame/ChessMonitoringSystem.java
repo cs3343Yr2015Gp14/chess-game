@@ -73,8 +73,13 @@ public class ChessMonitoringSystem {
 		for (ChessPiece c: allChessPieces)
 		{
 			tempPos = c.getPosition();
-			xPosInNum = tempPos.charAt(0)-96;
-			yPosInNum = tempPos.charAt(1)-48;
+			if (tempPos==null)
+				chessPiecesPosition[yPosInNum-1][xPosInNum-1]="O";
+			else
+			{
+				xPosInNum = tempPos.charAt(0)-96;
+				yPosInNum = tempPos.charAt(1)-48;	
+			}
 			chessPiecesPosition[yPosInNum-1][xPosInNum-1] = c.toString(); //a1 on chess board->[0][0] in array
 		}
 		
@@ -118,7 +123,7 @@ public class ChessMonitoringSystem {
         	else
           		System.out.println("The move is invalid.");
 		
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
 	}
 
 	public ChessPiece getChessPiece(String position){
@@ -151,7 +156,7 @@ public class ChessMonitoringSystem {
 		ChessPiece target = getChessPiece(position);
 		if(target instanceof King)
 			checkGameResult(target.getPlayer());
-		target.updatePosition(-1);	
+		target.updatePosition(null);	
 		//allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
 

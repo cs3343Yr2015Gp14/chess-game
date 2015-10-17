@@ -1,8 +1,8 @@
 package chessGame;
 
 public class Pawn extends ChessPiece {
-	private static final int initialYPos1 = 2;
-	private static final int initialYPos2 = 7;
+	private static final char initialYPos1 = '2';
+	private static final char initialYPos2 = '7';
 	private final int score=0;
 	
 	public Pawn(ChessPlayer player, String position) {
@@ -22,30 +22,30 @@ public class Pawn extends ChessPiece {
 			if (position.charAt(1)==initialYPos1 ||
 					position.charAt(1)==initialYPos2)
 			{
-				if (Math.abs(moveTo.charAt(1)-position.charAt(1))==2)
+				if (moveTo.charAt(0)==position.charAt(0) &&
+						Math.abs(moveTo.charAt(1)-position.charAt(1))==2)
 					return true;
 			}
 			
 			//other moves
-			if (Math.abs(moveTo.charAt(1)-position.charAt(1))==1) 
-					return true;
+			if (moveTo.charAt(0)==position.charAt(0) && 
+					Math.abs(moveTo.charAt(1)-position.charAt(1))==1)
+				return true;
 		}
 		else 
 		{
 			//pawn can only capture pieces in the front diagonally
 			if (CMS.getChessPiece(moveTo).getPlayer()!=this.player) 
 			{
-				int playerId = CMS.getChessPiece(moveTo).getPlayer().getPlayerId();
+				int playerId = this.player.getPlayerId();
 				int xPosDiff = moveTo.charAt(0)-position.charAt(0);
 				int yPosDiff = moveTo.charAt(1)-position.charAt(1);
 				boolean isValidPosDiff = Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==1; //x and y position diff. in 1
 				if (isValidPosDiff)
 				{
 					if ((playerId==1 && yPosDiff>0) ||	//player1's pawn: new yPos always larger  
-						(playerId==2 && yPosDiff<0))	//player2's pawn: new yPos always smaller
+							(playerId==2 && yPosDiff<0))	//player2's pawn: new yPos always smaller
 						return true;
-					else 
-						return false;
 				}
 			}
 		}
