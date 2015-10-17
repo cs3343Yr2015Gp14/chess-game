@@ -92,8 +92,8 @@ public class Rook extends ChessPiece {
 			}
 			
 		}//end of most outer loop
-		else
-			return false;
+
+		return false;
 
 	}//end of method
 
