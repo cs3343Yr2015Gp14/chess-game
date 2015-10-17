@@ -109,15 +109,15 @@ public class ChessMonitoringSystem {
 		else if(movingChess.getPlayer()!=player)
       			System.out.println("Selected piece does not belong to you!");
 		else if(movingChess.moveIsAvailable(newPos)) {
-			if(getChessPiece(newPos)!=null)
+			if(getChessPiece(newPos)!=null) {
 				player.addScore(getChessPiece(newPos).getScore());
 				removeChessPiece(newPos);
+			}
 			movingChess.updatePosition(newPos);
 		}
         	else
           		System.out.println("The move is invalid.");
 		
-		//updated the newPos of chessPiece
 		throw new UnsupportedOperationException();
 	}
 
@@ -151,8 +151,8 @@ public class ChessMonitoringSystem {
 		ChessPiece target = getChessPiece(position);
 		if(target instanceof King)
 			checkGameResult(target.getPlayer());
-			
-//		allChessPieces.remove(target); //IF USE ARRAYLIST
+		target.updatePosition(-1);	
+		//allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
 
 	public void checkGameResult(ChessPlayer winner) {
