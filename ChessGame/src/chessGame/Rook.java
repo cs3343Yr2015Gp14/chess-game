@@ -52,7 +52,11 @@ public class Rook extends ChessPiece {
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
-				}					
+				}
+				if(isBlocked==false)
+					return true;
+				else
+					return false;
 			}
 			// a1b2 horizontal move
 			if((int)position.charAt(1)==(int)moveTo.charAt(1))
@@ -80,12 +84,12 @@ public class Rook extends ChessPiece {
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
-				}					
+				}
+				if(isBlocked==false)
+					return true;
+				else
+					return false;
 			}
-			if(isBlocked==false)
-				return true;
-			else
-				return false;
 			
 		}//end of most outer loop
 		else
