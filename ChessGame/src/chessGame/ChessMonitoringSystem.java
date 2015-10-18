@@ -101,18 +101,22 @@ public class ChessMonitoringSystem {
 //		throw new UnsupportedOperationException();
 	}
 
-	public void moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
+	public boolean moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
 		/*----------------------------------------------
 		 * BELOW CODE DO ONLY ILLUSTRATE THE CONCEPT
 		 *----------------------------------------------*/
 		
 		
+		boolean validMove=true;
+		
 		ChessPiece movingChess = getChessPiece(oldPos);
 		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
 		if(movingChess == null)
 			System.out.println("Chesspiece not found!");
-		else if(movingChess.getPlayer()!=player)
+		else if(movingChess.getPlayer()!=player){
       			System.out.println("Selected piece does not belong to you!");
+      			validMove=false;
+		}
 		else if(movingChess.moveIsAvailable(newPos)) {
 			if(getChessPiece(newPos)!=null) {
 				player.addScore(getChessPiece(newPos).getScore());
@@ -120,8 +124,11 @@ public class ChessMonitoringSystem {
 			}
 			movingChess.updatePosition(newPos);
 		}
-        	else
+        else{
           		System.out.println("The move is invalid.");
+          		validMove=false;
+        }
+		return validMove;
 		
 //		throw new UnsupportedOperationException();
 	}

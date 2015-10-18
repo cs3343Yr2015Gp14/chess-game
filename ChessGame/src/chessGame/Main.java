@@ -34,13 +34,15 @@ public class Main {
 			String oldPos=in.nextLine();
 			System.out.println("Please enter the new position: ");
 			String newPos=in.nextLine();
-			chessMonitoringSystem.moveChessPiece(players[j],oldPos,newPos);
+			boolean move=chessMonitoringSystem.moveChessPiece(players[j],oldPos,newPos);
 			chessMonitoringSystem.showAllChessPiecesPosition();
-			if (j==0)
-				j++;
-			else
-				j--;
-		}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
+			if(move){
+				if (j==0)
+					j++;
+				else
+					j--;
+			}
+			}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
 		chessMonitoringSystem.getGameResult(mode);
 		
 		in.close();
