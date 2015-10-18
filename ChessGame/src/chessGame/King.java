@@ -19,11 +19,11 @@ public class King extends ChessPiece {
 				CMS.getChessPiece(moveTo).getPlayer()!=this.player)
 		{
 			// a1a2 vertical move
-			if((int)position.charAt(0)==(int)moveTo.charAt(1) && 
+			if((int)position.charAt(0)==(int)moveTo.charAt(0) && 
 					Math.abs((int)position.charAt(1)-(int)moveTo.charAt(1))==1)
 				return true;
 			// a1b1 horizontal move
-			else if((int)position.charAt(1)==(int)moveTo.charAt(2) && 
+			else if((int)position.charAt(1)==(int)moveTo.charAt(1) && 
 					Math.abs((int)position.charAt(0)-(int)moveTo.charAt(0))==1)
 				return true;
 			// a1b2 diagonal move
