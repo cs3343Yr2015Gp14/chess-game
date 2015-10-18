@@ -175,10 +175,12 @@ public class ChessMonitoringSystem {
 	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		ChessPiece target = getChessPiece(position);
-		if(target instanceof King)
-			checkGameResult(target.getPlayer());
+		if(target instanceof King) {
+			ChessPlayer winner = target.getPlayer();
+		}
 		//target.updatePosition(null);	
 		allChessPieces.remove(target); //IF USE ARRAYLIST
+		checkGameResult(winner);
 	}
 
 	public void checkGameResult(ChessPlayer winner) {
