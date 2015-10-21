@@ -5,12 +5,15 @@ public class Main {
 
 	
 	public static void main(String[] args) {
+		
 		Scanner in=new Scanner(System.in);
 		ChessMonitoringSystem chessMonitoringSystem=ChessMonitoringSystem.getInstance();
 
         System.out.println("Please choose a mode (1- Classic 2- Scoring): ");
         int mode=in.nextInt();
         in.nextLine();
+        String game=Integer.toString(mode);
+        
 		
 		int numOfPlayer=2;
 		ChessPlayer[] players=new ChessPlayer[numOfPlayer];
@@ -21,9 +24,15 @@ public class Main {
 			players[i]=player;
 		}
 //		chessMonitoringSystem.initializeChessBoard();
-		chessMonitoringSystem.initializeChessPieces(players[0],players[1]);
-		chessMonitoringSystem.showAllChessPiecesPosition();
+		
+		//Command pattern
+		Invoker invo = new Invoker();
+		StartGame start = new StartGame();
+		invo.callCmd(start);
+		invo.execute(players[0], players[1], game);
 		int j=0;
+		Move move=new Move();
+		Surrender sur = new Surrender();
 		do{
 			System.out.print("Player "+(j+1)+", ");
 			if (j==0)
@@ -34,16 +43,18 @@ public class Main {
 			String oldPos=in.nextLine();
 			System.out.println("Please enter the new position: ");
 			String newPos=in.nextLine();
-			boolean move=chessMonitoringSystem.moveChessPiece(players[j],oldPos,newPos);
+			String position=oldPos + ":" + newPos;
+			invo.callCmd(move);
+			boolean success=invo.execute(players[j], null, position);
 			chessMonitoringSystem.showAllChessPiecesPosition();
-			if(move){
+			if(success){
 				if (j==0)
 					j++;
 				else
 					j--;
 			}
 			}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
-		chessMonitoringSystem.getGameResult(mode);
+		chessMonitoringSystem.getGameResult(players[0], players[1]);
 		
 		in.close();
 		

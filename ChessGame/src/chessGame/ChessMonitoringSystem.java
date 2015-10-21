@@ -7,6 +7,7 @@ public class ChessMonitoringSystem {
 	//private static ChessPiece[] allChessPieces;
 	private static ArrayList<ChessPiece> allChessPieces;
 	private static ChessMonitoringSystem instance;
+	private Result result;
 
 	private ChessMonitoringSystem() {
 		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
@@ -20,10 +21,11 @@ public class ChessMonitoringSystem {
 		
 		return instance; 
 	}
-
-	public void initializeChessBoard() {
-		// TODO - implement ChessMonitoringSystem.initializeChessboard
-		throw new UnsupportedOperationException();
+	
+	public void startGame(ChessPlayer player1, ChessPlayer player2, Result result){
+		this.result = result;
+		initializeChessPieces(player1,player2);
+		showAllChessPiecesPosition();
 	}
 
 	public void initializeChessPieces(ChessPlayer player1, ChessPlayer player2) {
@@ -196,10 +198,11 @@ public class ChessMonitoringSystem {
 		return false;
 	}
 
-	public void getGameResult(int mode) {
+	public void getGameResult(ChessPlayer player1, ChessPlayer player2) {
 		// TODO Auto-generated method stub
 		//player.getPlayerScore()
 		//player.getPlayerName()
+		result.getResult(player1, player2);
 	}
 
 }

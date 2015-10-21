@@ -3,9 +3,10 @@ package chessGame;
 public class Move implements Command {
 
 	@Override
-	public boolean execute(ChessPlayer player, String relatedA, String relatedB) {
+	public boolean execute(ChessPlayer player, ChessPlayer anotherPlayer, String related) {
 		ChessMonitoringSystem chessMonitoringSystem = ChessMonitoringSystem.getInstance();
-		boolean success=chessMonitoringSystem.moveChessPiece(player,relatedA,relatedB);
+		String[] position = related.split(":");
+		boolean success=chessMonitoringSystem.moveChessPiece(player,position[0],position[1]);
 		return success;
 	}
 
