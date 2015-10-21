@@ -177,7 +177,7 @@ public class ChessMonitoringSystem {
 	}
 	*/
 
-	private void removeChessPiece(String position) {
+	public void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		ChessPiece target = getChessPiece(position);
 		if(target instanceof King) {
