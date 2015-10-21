@@ -1,0 +1,2 @@
+Create a Command Pattern
+Separate CMS into Result(Considering a socring system) and ChessBoard
