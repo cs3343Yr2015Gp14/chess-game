@@ -128,8 +128,10 @@ public class ChessMonitoringSystem {
 		
 		ChessPiece movingChess = getChessPiece(oldPos);
 		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
-		if(movingChess == null)
+		if(movingChess == null){
 			System.out.println("Chesspiece not found!");
+			validMove=false;
+		}
 		else if(movingChess.getPlayer()!=player){
       			System.out.println("Selected piece does not belong to you!");
       			validMove=false;
@@ -181,6 +183,7 @@ public class ChessMonitoringSystem {
 		if(target instanceof King) {
 			this.winner = target.getPlayer();
 		}
+		target.getPlayer().lossPiece();
 		//target.updatePosition(null);	
 		allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
@@ -200,7 +203,13 @@ public class ChessMonitoringSystem {
 		// TODO Auto-generated method stub
 		//player.getPlayerScore()
 		//player.getPlayerName()
-		result.getResult(player1, player2);
+		System.out.println(result.getResult(player1, player2));
+	}
+
+	public void surrender(ChessPlayer player1, ChessPlayer player2) {
+		// TODO Auto-generated method stub
+		if (result instanceof ClassicResult)
+			result = (Result) new SurrenderClassic();
 	}
 
 }

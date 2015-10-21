@@ -32,6 +32,7 @@ public class Main {
 		invo.execute(players[0], players[1], game);
 		int j=0;
 		Move move=new Move();
+		Surrender giveUp = new Surrender();
 		ShowResult finish = new ShowResult();
 		do{
 			System.out.print("Player "+(j+1)+", ");
@@ -39,26 +40,48 @@ public class Main {
 				System.out.println("Your chess pieces are in UPPER-CASE.");
 			else
 				System.out.println("Your chess pieces are in lower-case.");
-			System.out.println("Please enter the position of the chess piece you want to move: ");
-			String oldPos=in.nextLine();
-			System.out.println("Please enter the new position: ");
-			String newPos=in.nextLine();
-			String position=oldPos + ":" + newPos;
-			invo.callCmd(move);
-			boolean success=invo.execute(players[j], null, position);
-			chessMonitoringSystem.showAllChessPiecesPosition();
-			if(success){
-				if (j==0)
-					j++;
-				else
-					j--;
+			
+			System.out.println("Please enter the action you want to take: 1-move 2-surrender");
+			int cmd = 0;
+			while(true){
+				try{
+					cmd = in.nextInt();
+					break;
+				}
+				catch(Exception e){
+					System.out.println("Command is not vaild, please enter either \"1\" or \"2\"");
+					in.next();
+				}
 			}
-			}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
+			if (cmd == 1){
+				System.out.println("Please enter the position of the chess piece you want to move: (example: \"a1\")");
+				String oldPos=in.nextLine();
+				System.out.println("Please enter the new position: ");
+				String newPos=in.nextLine();
+				String position=oldPos + ":" + newPos;
+				invo.callCmd(move);
+				boolean success=invo.execute(players[j], null, position);
+				chessMonitoringSystem.showAllChessPiecesPosition();
+				if(success){
+					if (j==0)
+						j++;
+					else
+						j--;
+				}
+			}
+			else if (cmd ==2){
+				invo.callCmd(giveUp);
+				invo.execute(players[0], players[1], null);
+				break;
+			}
+			else {
+				System.out.println("Command is not vaild, please enter either \"1\" or \"2\":");
+			}
+		}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
 		invo.callCmd(finish);
 		invo.execute(players[0], players[1], null);
 		in.close();
-		
-		
+		System.out.println("This is the end of the game!");
 	}
 
 }
