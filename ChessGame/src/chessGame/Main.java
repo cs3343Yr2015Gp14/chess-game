@@ -32,7 +32,7 @@ public class Main {
 		invo.execute(players[0], players[1], game);
 		int j=0;
 		Move move=new Move();
-		Surrender sur = new Surrender();
+		ShowResult finish = new ShowResult();
 		do{
 			System.out.print("Player "+(j+1)+", ");
 			if (j==0)
@@ -54,8 +54,8 @@ public class Main {
 					j--;
 			}
 			}while(!chessMonitoringSystem.isKingCaptured());   //Check if King is captured
-		chessMonitoringSystem.getGameResult(players[0], players[1]);
-		
+		invo.callCmd(finish);
+		invo.execute(players[0], players[1], null);
 		in.close();
 		
 		

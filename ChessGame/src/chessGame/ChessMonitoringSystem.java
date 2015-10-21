@@ -8,6 +8,7 @@ public class ChessMonitoringSystem {
 	private static ArrayList<ChessPiece> allChessPieces;
 	private static ChessMonitoringSystem instance;
 	private Result result;
+	private ChessPlayer winner;
 
 	private ChessMonitoringSystem() {
 		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
@@ -177,6 +178,9 @@ public class ChessMonitoringSystem {
 	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		ChessPiece target = getChessPiece(position);
+		if(target instanceof King) {
+			this.winner = target.getPlayer();
+		}
 		//target.updatePosition(null);	
 		allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
@@ -187,11 +191,9 @@ public class ChessMonitoringSystem {
 	}
 	
 	public ChessPlayer getWinner() {
-		for (ChessPiece c: allChessPieces){
-			if (c instanceof King)
-				return c.getPlayer();
-		}
-		return null;
+		// TODO Auto-generated method stub
+		//or you can use for loop here, and no global variable
+		return this.winner;
 	}
 
 	public void getGameResult(ChessPlayer player1, ChessPlayer player2) {
