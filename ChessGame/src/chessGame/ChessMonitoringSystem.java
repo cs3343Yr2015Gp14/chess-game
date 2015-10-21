@@ -177,25 +177,21 @@ public class ChessMonitoringSystem {
 	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		ChessPiece target = getChessPiece(position);
-		ChessPlayer winner = null;
-		if(target instanceof King) {
-			winner = target.getPlayer();
-		}
 		//target.updatePosition(null);	
 		allChessPieces.remove(target); //IF USE ARRAYLIST
-		checkGameResult(winner);
-	}
-
-	public void checkGameResult(ChessPlayer winner) {
-		// TODO - Possible Gamemode conditions
-		//if(getGameMode());
-		System.out.printf("Player %s won!", winner.toString());
-
 	}
 
 	public boolean isKingCaptured() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public ChessPlayer getWinner() {
+		for (ChessPiece c: allChessPieces){
+			if (c instanceof King)
+				return c.getPlayer();
+		}
+		return null;
 	}
 
 	public void getGameResult(ChessPlayer player1, ChessPlayer player2) {
