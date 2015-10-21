@@ -1,5 +1,5 @@
 package chessGame;
 
 public interface Command{
-	public void execute(String related);
+	public boolean execute(ChessPlayer player, String relatedA, String relatedB);
 }
