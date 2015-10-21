@@ -1,3 +1,5 @@
-public interface Command(){
-  public void execute(String related);
+package chessGame;
+
+public interface Command{
+	public void execute(String related);
 }
