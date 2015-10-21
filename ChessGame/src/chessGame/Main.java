@@ -55,9 +55,9 @@ public class Main {
 			}
 			if (cmd == 1){
 				System.out.println("Please enter the position of the chess piece you want to move: (example: \"a1\")");
-				String oldPos=in.nextLine();
+				String oldPos=in.next();
 				System.out.println("Please enter the new position: ");
-				String newPos=in.nextLine();
+				String newPos=in.next();
 				String position=oldPos + ":" + newPos;
 				invo.callCmd(move);
 				boolean success=invo.execute(players[j], null, position);

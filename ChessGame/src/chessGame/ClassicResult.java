@@ -7,6 +7,6 @@ public class ClassicResult implements Result{
 		// TODO Auto-generated method stub
 		ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
 		ChessPlayer winner = cms.getWinner();
-		return winner.toString() + "is the winner!";
+		return winner.toString() + " is the winner!";
 	}
 }

@@ -14,7 +14,7 @@ public class ScoringResult implements Result{
 			winner = player2;
 		else
 			return "Draw!";
-		return winner.toString() + "is the winner";
+		return winner.toString() + " is the winner";
 	}
 
 }
