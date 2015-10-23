@@ -13,7 +13,7 @@ public class ScoringMode implements GameMode{
 			winner = player2;
 		else
 			return "Draw!";
-		return winner.toString() + " is the winner";
+		return winner.toString() + " is the winner!" + "\n" + "winner's score: " + winner.getPlayerScore();
 	}
 
 	@Override

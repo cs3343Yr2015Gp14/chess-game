@@ -145,9 +145,9 @@ public class ChessMonitoringSystem {
 
 	public int compareRank(ChessPiece move, ChessPiece old){
 		if (move.getRank() > old.getRank())
-			return 1;
-		else if (old.getRank() > move.getRank())
 			return 0;
+		else if (old.getRank() > move.getRank())
+			return 1;
 		else
 			return 2;
 	}
@@ -189,14 +189,21 @@ public class ChessMonitoringSystem {
 	}
 
 	public void getResult(ChessPlayer player1, ChessPlayer player2) {
-		// TODO Auto-generated method stub
 		//player.getPlayerScore()
 		//player.getPlayerName()
 		System.out.println(mode.getResult(player1, player2));
 	}
 
-	public void startGame(GameMode game) {
-		this.mode = game;
+	public void startGame(int mode) {
+		if (mode == 1){
+        	this.mode = new ClassicMode();
+        }
+        else if (mode == 2){
+        	this.mode = new ScoringMode();
+        }
+        else if (mode ==3 ){
+        	this.mode = new RankScoringMode();
+        }
 	}
 
 	public ChessPlayer isKingCaptured() {

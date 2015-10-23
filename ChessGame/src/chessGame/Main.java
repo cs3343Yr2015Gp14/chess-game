@@ -9,22 +9,20 @@ public class Main {
 		Scanner in=new Scanner(System.in);
 		ChessMonitoringSystem chessMonitoringSystem=ChessMonitoringSystem.getInstance();
 
-        System.out.println("Please choose a mode (1- Classic 2- Scoring 3- Scoring+)[default: Classic]: ");
-        int mode=in.nextInt();
-        in.nextLine();
-        GameMode game= null;
-        switch (mode){
-        	case 1:
-        		game = new ClassicMode();
-        	case 2:
-        		game = new ScoringMode();
-        	case 3:
-        		game = new RankScoringMode();
-        	default:
-        		game = new ClassicMode();
+        System.out.println("Please choose a mode (1- Classic 2- Scoring 3- Scoring+)");
+        int mode=0;
+        while (true){
+        	mode=in.nextInt();
+	        if (mode <= 3 && mode >0){
+	        	chessMonitoringSystem.startGame(mode);
+	        	break;
+	        }
+	        else{
+	        	System.out.println("Invalid Mode! Please enter either 1, 2 or 3");
+	        }
         }
-        chessMonitoringSystem.startGame(game);
 		
+        in.nextLine();
 		int numOfPlayer=2;
 		ChessPlayer[] players=new ChessPlayer[numOfPlayer];
 		for (int i=0;i<numOfPlayer;i++){
