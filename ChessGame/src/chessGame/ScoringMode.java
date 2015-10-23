@@ -18,12 +18,16 @@ public class ScoringMode implements GameMode{
 	}
 
         public boolean isEndGame(){
-                cms=;
-                return cms.isKingCaptured();
+        	ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
+        	if (cms.isKingCaptured()!=null)
+        		return true;
+        	else
+        		return false;
         }
 
-        public void addScore(ChessPlayer player, int score, boolean isHighter){
-                player.addScore();
-        }
+		@Override
+		public void addScore(ChessPlayer player, int[] scoreRelated) {
+			player.addScore(scoreRelated[0]);
+		}
 
 }

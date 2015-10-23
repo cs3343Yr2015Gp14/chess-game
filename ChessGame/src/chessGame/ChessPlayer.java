@@ -14,7 +14,7 @@ public class ChessPlayer {
 		chessPiece=16;
 	}
 	
-	public void addScore(int score){
+	public void addScore(double score){
 		playerScore+=score;
 	}
 	

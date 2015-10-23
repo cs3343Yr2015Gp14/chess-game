@@ -7,8 +7,7 @@ public class ChessMonitoringSystem {
 	//private static ChessPiece[] allChessPieces;
 	private static ArrayList<ChessPiece> allChessPieces;
 	private static ChessMonitoringSystem instance;
-	private Result result;
-	private ChessPlayer winner;
+	private GameMode mode;
 
 	private ChessMonitoringSystem() {
 		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
@@ -21,12 +20,6 @@ public class ChessMonitoringSystem {
 			instance = new ChessMonitoringSystem();
 		
 		return instance; 
-	}
-	
-	public void startGame(ChessPlayer player1, ChessPlayer player2, Result result){
-		this.result = result;
-		initializeChessPieces(player1,player2);
-		showAllChessPiecesPosition();
 	}
 
 	public void initializeChessPieces(ChessPlayer player1, ChessPlayer player2) {
@@ -123,35 +116,42 @@ public class ChessMonitoringSystem {
 		 * BELOW CODE DO ONLY ILLUSTRATE THE CONCEPT
 		 *----------------------------------------------*/
 		
-		
-		boolean validMove=true;
-		
 		ChessPiece movingChess = getChessPiece(oldPos);
 		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
 		if(movingChess == null){
 			System.out.println("Chesspiece not found!");
-			validMove=false;
+			return false;
 		}
 		else if(movingChess.getPlayer()!=player){
       			System.out.println("Selected piece does not belong to you!");
-      			validMove=false;
+      			return false;
 		}
 		else if(movingChess.moveIsAvailable(newPos)) {
 			if(getChessPiece(newPos)!=null) {
-				player.addScore(getChessPiece(newPos).getScore());
+				int rank = compareRank(movingChess, getChessPiece(newPos));
+				int[] score={getChessPiece(newPos).getScore(), rank};
+				mode.addScore(player, score);
 				removeChessPiece(newPos);
 			}
 			movingChess.updatePosition(newPos);
+			return true;
 		}
         else{
           		System.out.println("The move is invalid.");
-          		validMove=false;
+          		return false;
         }
-		return validMove;
-		
 //		throw new UnsupportedOperationException();
 	}
 
+	public int compareRank(ChessPiece move, ChessPiece old){
+		if (move.getRank() > old.getRank())
+			return 1;
+		else if (old.getRank() > move.getRank())
+			return 0;
+		else
+			return 2;
+	}
+	
 	public ChessPiece getChessPiece(String position){
 		String tempChessPos = null;
 		for (ChessPiece c: allChessPieces)
@@ -177,39 +177,41 @@ public class ChessMonitoringSystem {
 	}
 	*/
 
-	public void removeChessPiece(String position) {
+	private void removeChessPiece(String position) {
 		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		ChessPiece target = getChessPiece(position);
-		if(target instanceof King) {
-			this.winner = target.getPlayer();
-		}
-		target.getPlayer().lossPiece();
 		//target.updatePosition(null);	
 		allChessPieces.remove(target); //IF USE ARRAYLIST
 	}
 
-	public boolean isKingCaptured() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public ChessPlayer getWinner() {
-		// TODO Auto-generated method stub
-		//or you can use for loop here, and no global variable
-		return this.winner;
+	public boolean endGame() {
+		return this.mode.isEndGame();
 	}
 
-	public void getGameResult(ChessPlayer player1, ChessPlayer player2) {
+	public void getResult(ChessPlayer player1, ChessPlayer player2) {
 		// TODO Auto-generated method stub
 		//player.getPlayerScore()
 		//player.getPlayerName()
-		System.out.println(result.getResult(player1, player2));
+		System.out.println(mode.getResult(player1, player2));
 	}
 
-	public void surrender(ChessPlayer player1, ChessPlayer player2) {
-		// TODO Auto-generated method stub
-		if (result instanceof ClassicResult)
-			result = (Result) new SurrenderClassic();
+	public void startGame(GameMode game) {
+		this.mode = game;
+	}
+
+	public ChessPlayer isKingCaptured() {
+		ChessPlayer winner = null;
+		int counter=0;
+		for (ChessPiece c: allChessPieces){
+			if (c instanceof King){
+				winner = c.getPlayer();
+				counter++;
+			}
+		}
+		if (counter ==2)
+			return null;
+		else
+			return winner;
 	}
 
 }

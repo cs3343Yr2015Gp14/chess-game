@@ -4,6 +4,7 @@ public class Pawn extends ChessPiece {
 	private static final char initialYPos1 = '2';
 	private static final char initialYPos2 = '7';
 	private final int score=0;
+	private final int rank=1;
 	
 	public Pawn(ChessPlayer player, String position) {
 		super(player, position);	
@@ -65,5 +66,10 @@ public class Pawn extends ChessPiece {
 			return "p";
 		else
 			return null;
+	}
+
+	@Override
+	public int getRank() {
+		return rank;
 	}
 }
