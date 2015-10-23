@@ -1,6 +1,6 @@
 package chessGame;
 
-public class ScoringResult implements Result{
+public class ScoringMode implements GameMode{
 
 	@Override
 	public String getResult(ChessPlayer player1, ChessPlayer player2) {
@@ -16,5 +16,14 @@ public class ScoringResult implements Result{
 			return "Draw!";
 		return winner.toString() + " is the winner";
 	}
+
+        public boolean isEndGame(){
+                cms=;
+                return cms.isKingCaptured();
+        }
+
+        public void addScore(ChessPlayer player, int score, boolean isHighter){
+                player.addScore();
+        }
 
 }
