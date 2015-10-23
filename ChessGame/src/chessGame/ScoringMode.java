@@ -4,7 +4,6 @@ public class ScoringMode implements GameMode{
 
 	@Override
 	public String getResult(ChessPlayer player1, ChessPlayer player2) {
-		// TODO Auto-generated method stub
 		ChessPlayer winner;
 		int score1 = player1.getPlayerScore();
 		int score2 = player2.getPlayerScore();
@@ -17,17 +16,18 @@ public class ScoringMode implements GameMode{
 		return winner.toString() + " is the winner";
 	}
 
-        public boolean isEndGame(){
-        	ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
-        	if (cms.isKingCaptured()!=null)
-        		return true;
-        	else
-        		return false;
-        }
+	@Override
+	public boolean isEndGame() {
+		ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
+    	if (cms.isKingCaptured()!=null)
+    		return true;
+    	else
+    		return false;
+	}
 
-		@Override
-		public void addScore(ChessPlayer player, int[] scoreRelated) {
-			player.addScore(scoreRelated[0]);
-		}
+	@Override
+	public void addScore(ChessPlayer player, int[] scoreRelated) {
+		player.addScore(scoreRelated[0]);
+	}
 
 }
