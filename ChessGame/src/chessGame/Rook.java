@@ -1,8 +1,8 @@
 package chessGame;
 
 public class Rook extends ChessPiece {
-	private final int score=0;
-	private final int rank=2;
+	private final int score=40;
+	private final int rank=4;
 	
 	public Rook(ChessPlayer player, String position) {
 		super(player, position);	

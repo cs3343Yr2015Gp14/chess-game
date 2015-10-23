@@ -1,7 +1,7 @@
 package chessGame;
 
 public class King extends ChessPiece {
-	private final int score=0;
+	private final int score=150;
 	private final int rank=6;
 	
 	public King(ChessPlayer player, String position) {
