@@ -3,7 +3,7 @@ package chessGame;
 public class ScoringMode implements GameMode{
 
 	@Override
-	public String getResult(ChessPlayer player1, ChessPlayer player2) {
+	public String printResult(ChessPlayer player1, ChessPlayer player2) {
 		ChessPlayer winner;
 		int score1 = player1.getPlayerScore();
 		int score2 = player2.getPlayerScore();

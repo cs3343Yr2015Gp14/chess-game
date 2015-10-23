@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 public class ChessMonitoringSystem {
 
-	//private static ChessPiece[] allChessPieces;
 	private static ArrayList<ChessPiece> allChessPieces;
 	private static ChessMonitoringSystem instance;
 	private GameMode mode;
 
 	private ChessMonitoringSystem() {
 		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
-		
-//		throw new UnsupportedOperationException();
 	}
 
 	public static ChessMonitoringSystem getInstance() {
@@ -23,12 +20,10 @@ public class ChessMonitoringSystem {
 	}
 	
 	public void initializeChessBoard() {
-		throw new UnsupportedOperationException();		
+	
 	}
 
 	public void initializeChessPieces(ChessPlayer player1, ChessPlayer player2) {
-		// TODO - implement ChessMonitoringSystem.initializeChessPieces
-		//allChessPieces = new ChessPiece[32];
 		allChessPieces=new ArrayList<>();
 		ChessPlayer[] chessPlayerList = {player1, player2};
 		
@@ -37,15 +32,6 @@ public class ChessMonitoringSystem {
 		
 		for (int i = 0; i<2; i++)
 		{
-//			allChessPieces[i*16] = new Rook(chessPlayerList[i], "a"+allChessYPos);
-//			allChessPieces[i*16+1] = new Knight(chessPlayerList[i], "b"+allChessYPos);
-//			allChessPieces[i*16+2] = new Bishop(chessPlayerList[i], "c"+allChessYPos);
-//			allChessPieces[i*16+3] = new King(chessPlayerList[i], "d"+allChessYPos);
-//			allChessPieces[i*16+4] = new Queen(chessPlayerList[i], "e"+allChessYPos);
-//			allChessPieces[i*16+5] = new Bishop(chessPlayerList[i], "f"+allChessYPos);
-//			allChessPieces[i*16+6] = new Knight(chessPlayerList[i], "g"+allChessYPos);
-//			allChessPieces[i*16+7] = new Rook(chessPlayerList[i], "h"+allChessYPos);
-
 			allChessPieces.add(new Rook(chessPlayerList[i], "a"+allChessYPos));
 			allChessPieces.add(new Knight(chessPlayerList[i], "b"+allChessYPos));
 			allChessPieces.add(new Bishop(chessPlayerList[i], "c"+allChessYPos));
@@ -60,7 +46,6 @@ public class ChessMonitoringSystem {
 			for (int j = 0; j<8; j++)
 			{
 				String pawnXPos= ""+(char)xPosCharCode; //x-coordinate of pawns' position
-				//allChessPieces[i*16+8+j] = new Pawn(chessPlayerList[i], pawnXPos+pawnYPos);
 				allChessPieces.add(new Pawn(chessPlayerList[i], pawnXPos+pawnYPos));
 				xPosCharCode++;
 			}
@@ -68,12 +53,9 @@ public class ChessMonitoringSystem {
 			pawnYPos = 7; //inverted y-coordinate for Pawns
 			allChessYPos = 8; //invert y-coordinate for oponent's chess pieces
 		}
-		
-//		throw new UnsupportedOperationException();
 	}
 
 	public void showAllChessPiecesPosition() {
-		// TODO - implement ChessMonitoringSystem.showAllChessPiecesPosition
 		String [][] chessPiecesPosition = new String[8][8]; //virtual chess board
 		String tempPos = null;
 		int xPosInNum = 0;
@@ -111,8 +93,6 @@ public class ChessMonitoringSystem {
 		}
 		
 		System.out.println(String.format("%3s%2s%2s%2s%2s%2s%2s%2s","a", "b", "c", "d", "e", "f", "g", "h"));
-		
-//		throw new UnsupportedOperationException();
 	}
 
 	public boolean moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
@@ -130,7 +110,7 @@ public class ChessMonitoringSystem {
       			System.out.println("Selected piece does not belong to you!");
       			return false;
 		}
-		else if(movingChess.moveIsAvailable(newPos)) {
+		else if(movingChess.isValidMove(newPos)) {
 			if(getChessPiece(newPos)!=null) {
 				int rank = compareRank(movingChess, getChessPiece(newPos));
 				int[] score={getChessPiece(newPos).getScore(), rank};
@@ -144,7 +124,6 @@ public class ChessMonitoringSystem {
           		System.out.println("The move is invalid.");
           		return false;
         }
-//		throw new UnsupportedOperationException();
 	}
 
 	public int compareRank(ChessPiece move, ChessPiece old){
@@ -195,7 +174,7 @@ public class ChessMonitoringSystem {
 	public void getResult(ChessPlayer player1, ChessPlayer player2) {
 		//player.getPlayerScore()
 		//player.getPlayerName()
-		System.out.println(mode.getResult(player1, player2));
+		System.out.println(mode.printResult(player1, player2));
 	}
 
 	public void startGame(int mode) {

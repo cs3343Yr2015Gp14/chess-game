@@ -14,7 +14,7 @@ public abstract class ChessPiece {
 		return this.player;
 	}
 	
-	public abstract boolean moveIsAvailable(String moveTo);
+	public abstract boolean isValidMove(String moveTo);
 
 	public String getPosition() {
 		return this.position;

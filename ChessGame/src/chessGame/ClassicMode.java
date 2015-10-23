@@ -5,7 +5,7 @@ public class ClassicMode implements GameMode{
 	private ChessPlayer winner;
 	
 	@Override
-	public String getResult(ChessPlayer player1, ChessPlayer player2) {
+	public String printResult(ChessPlayer player1, ChessPlayer player2) {
 		return winner.toString() + " is the winner!";
 	}
 

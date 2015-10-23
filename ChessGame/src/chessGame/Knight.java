@@ -9,7 +9,7 @@ public class Knight extends ChessPiece {
 		super(player, position);	
 	}
 	
-	public boolean moveIsAvailable(String moveTo) {
+	public boolean isValidMove(String moveTo) {
 		// TO-DO: add Exception out of the board scope 
 		// throw new UnsupportedOperationException();
 		// TO-DO: Exception own chess
@@ -18,11 +18,11 @@ public class Knight extends ChessPiece {
 		if(CMS.getChessPiece(moveTo)==null || 
 				CMS.getChessPiece(moveTo).getPlayer()!=this.player)
 		{
-			if (Math.abs(moveTo.charAt(0)-position.charAt(0))==2 &&
-					Math.abs(moveTo.charAt(1)-position.charAt(1))==1)
+			int xPosDiff = moveTo.charAt(0)-position.charAt(0);
+			int yPosDiff = moveTo.charAt(1)-position.charAt(1);
+			if (Math.abs(xPosDiff)==2 && Math.abs(yPosDiff)==1)
 				return true;
-			else if (Math.abs(moveTo.charAt(0)-position.charAt(0))==1 &&
-					Math.abs(moveTo.charAt(1)-position.charAt(1))==2)
+			else if (Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==2)
 				return true;
 		}
 		return false;

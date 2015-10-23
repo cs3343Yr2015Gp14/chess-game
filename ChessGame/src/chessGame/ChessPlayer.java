@@ -5,13 +5,13 @@ public class ChessPlayer {
 	private String name;
 	private int id;
 	private int playerScore;
-	private int chessPiece;
+	private int numOfPieces;
 
 	public ChessPlayer(String playerName,int id) {
 		this.name=playerName;
 		this.id=id;
 		playerScore=0;
-		chessPiece=16;
+		numOfPieces=16;
 	}
 	
 	public void addScore(double score){
@@ -27,7 +27,7 @@ public class ChessPlayer {
 	}
 	
 	public void lossPiece(){
-		chessPiece--;
+		numOfPieces--;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class ChessPlayer {
 	}
 
 	public int getPiece() {
-		return this.chessPiece;
+		return this.numOfPieces;
 	}
 
 }

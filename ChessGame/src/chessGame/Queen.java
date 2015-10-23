@@ -9,7 +9,7 @@ public class Queen extends ChessPiece {
 	}
 	
 	@Override
-	public boolean moveIsAvailable(String moveTo) {
+	public boolean isValidMove(String moveTo) {
 		// TO-DO: add Exception out of the board scope 
 		// throw new UnsupportedOperationException();
 		// TO-DO: Exception own chess
@@ -28,12 +28,12 @@ public class Queen extends ChessPiece {
 			//Integer.toString(i)
 			
 			// a1a2 vertical move
-			if((int)position.charAt(0)==(int)moveTo.charAt(0))
+			if(position.charAt(0)==moveTo.charAt(0))
 			{
 				// move down
-				if((int)position.charAt(1)-(int)moveTo.charAt(1)>0)	
+				if(position.charAt(1)-moveTo.charAt(1)>0)	
 				{
-					numOfMoves=((int)position.charAt(1)-(int)moveTo.charAt(1));
+					numOfMoves=(position.charAt(1)-moveTo.charAt(1));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
@@ -43,9 +43,9 @@ public class Queen extends ChessPiece {
 					}	
 				}
 				// move up
-				if((int)position.charAt(1)-(int)moveTo.charAt(1)<0)
+				if(position.charAt(1)-moveTo.charAt(1)<0)
 				{
-					numOfMoves=(int)moveTo.charAt(1)-(int)position.charAt(1);
+					numOfMoves=moveTo.charAt(1)-position.charAt(1);
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
@@ -60,28 +60,28 @@ public class Queen extends ChessPiece {
 					return false;
 			}
 			// a1b2 horizontal move
-			if((int)position.charAt(1)==(int)moveTo.charAt(1))
+			if(position.charAt(1)==moveTo.charAt(1))
 			{
 				// move left
-				if((int)position.charAt(0)-(int)moveTo.charAt(0)>0)	
+				if(position.charAt(0)-moveTo.charAt(0)>0)	
 				{
-					numOfMoves=((int)position.charAt(0)-(int)moveTo.charAt(0));
+					numOfMoves=(position.charAt(0)-moveTo.charAt(0));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)((int)position.charAt(0)-i)+Integer.toString(position.charAt(1)));//wrong formatting
+						tempChess=CMS.getChessPiece((char)(position.charAt(0)-i)+Integer.toString(position.charAt(1)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// move right
-				if((int)position.charAt(0)-(int)moveTo.charAt(0)<0)
+				if(position.charAt(0)-moveTo.charAt(0)<0)
 				{
-					numOfMoves=(int)moveTo.charAt(0)-(int)position.charAt(0);
+					numOfMoves=moveTo.charAt(0)-position.charAt(0);
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)((int)position.charAt(0)+i)+Integer.toString(position.charAt(1)));//wrong formatting
+						tempChess=CMS.getChessPiece((char)(position.charAt(0)+i)+Integer.toString(position.charAt(1)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
@@ -92,57 +92,57 @@ public class Queen extends ChessPiece {
 					return false;
 			}
 			
-			if(Math.abs((int)position.charAt(1)-(int)moveTo.charAt(1))==
-					Math.abs((int)position.charAt(0)-(int)moveTo.charAt(0)))
+			if(Math.abs(position.charAt(1)-moveTo.charAt(1))==
+					Math.abs(position.charAt(0)-moveTo.charAt(0)))
 			{
 				// top left corner
-				if((int)position.charAt(0)-(int)moveTo.charAt(0)>0 &&
-						(int)position.charAt(1)-(int)moveTo.charAt(1)<0)	
+				if(position.charAt(0)-moveTo.charAt(0)>0 &&
+						position.charAt(1)-moveTo.charAt(1)<0)	
 				{
-					numOfMoves=((int)position.charAt(0)-(int)moveTo.charAt(0));
+					numOfMoves=(position.charAt(0)-moveTo.charAt(0));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)((int)position.charAt(0)-i)+String.valueOf((position.charAt(1)+i)));//wrong formatting
+						tempChess=CMS.getChessPiece((char)(position.charAt(0)-i)+String.valueOf((position.charAt(1)+i)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// lower left corner
-				if((int)position.charAt(0)-(int)moveTo.charAt(0)>0 &&
-						(int)position.charAt(1)-(int)moveTo.charAt(1)>0)	
+				if(position.charAt(0)-moveTo.charAt(0)>0 &&
+						position.charAt(1)-moveTo.charAt(1)>0)	
 				{
-					numOfMoves=((int)position.charAt(0)-(int)moveTo.charAt(0));
+					numOfMoves=(position.charAt(0)-moveTo.charAt(0));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)((int)position.charAt(0)-i)+String.valueOf((position.charAt(1)-i)));//wrong formatting
+						tempChess=CMS.getChessPiece((char)(position.charAt(0)-i)+String.valueOf((position.charAt(1)-i)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// top right corner
-				if((int)position.charAt(0)-(int)moveTo.charAt(0)<0 &&
-						(int)position.charAt(1)-(int)moveTo.charAt(1)<0)	
+				if(position.charAt(0)-moveTo.charAt(0)<0 &&
+						position.charAt(1)-moveTo.charAt(1)<0)	
 				{
-					numOfMoves=((int)moveTo.charAt(0)-(int)position.charAt(0));
+					numOfMoves=(moveTo.charAt(0)-position.charAt(0));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)((int)position.charAt(0)+i)+String.valueOf((position.charAt(1)+i)));//wrong formatting
+						tempChess=CMS.getChessPiece((char)(position.charAt(0)+i)+String.valueOf((position.charAt(1)+i)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// lower right corner
-				if((int)position.charAt(0)-(int)moveTo.charAt(0)<0 &&
-						(int)position.charAt(1)-(int)moveTo.charAt(1)>0)	
+				if(position.charAt(0)-moveTo.charAt(0)<0 &&
+						position.charAt(1)-moveTo.charAt(1)>0)	
 				{
-					numOfMoves=((int)moveTo.charAt(1)-(int)position.charAt(1));
+					numOfMoves=(moveTo.charAt(1)-position.charAt(1));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)((int)position.charAt(0)+i)+String.valueOf((position.charAt(1)-i)));//wrong formatting
+						tempChess=CMS.getChessPiece((char)(position.charAt(0)+i)+String.valueOf((position.charAt(1)-i)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	

@@ -9,7 +9,7 @@ public class King extends ChessPiece {
 	}
 	
 	@Override
-	public boolean moveIsAvailable(String moveTo) {	
+	public boolean isValidMove(String moveTo) {	
 		 
 		// TO-DO: add Exception out of the board scope 
 		// throw new UnsupportedOperationException();
@@ -19,17 +19,16 @@ public class King extends ChessPiece {
 		if(CMS.getChessPiece(moveTo)==null || 
 				CMS.getChessPiece(moveTo).getPlayer()!=this.player)
 		{
+			int xPosDiff = position.charAt(0)-moveTo.charAt(0);
+			int yPosDiff = position.charAt(1)-moveTo.charAt(1);
 			// a1a2 vertical move
-			if((int)position.charAt(0)==(int)moveTo.charAt(0) && 
-					Math.abs((int)position.charAt(1)-(int)moveTo.charAt(1))==1)
+			if(position.charAt(0)==moveTo.charAt(0) && Math.abs(yPosDiff)==1)
 				return true;
 			// a1b1 horizontal move
-			else if((int)position.charAt(1)==(int)moveTo.charAt(1) && 
-					Math.abs((int)position.charAt(0)-(int)moveTo.charAt(0))==1)
+			else if(position.charAt(1)==moveTo.charAt(1) && Math.abs(xPosDiff)==1)
 				return true;
 			// a1b2 diagonal move
-			else if(Math.abs((int)position.charAt(1)-(int)moveTo.charAt(1))==1 &&
-					Math.abs((int)position.charAt(0)-(int)moveTo.charAt(0))==1)
+			else if(Math.abs(yPosDiff)==1 && Math.abs(xPosDiff)==1)
 				return true;
 		} 
 		

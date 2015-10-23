@@ -10,47 +10,75 @@ public class Pawn extends ChessPiece {
 		super(player, position);	
 	}
 	
-	public boolean moveIsAvailable(String moveTo) {
+	public boolean isValidMove(String moveTo) {
 		
 		// TO-DO: add Exception out of the board scope 
 		// throw new UnsupportedOperationException();
 		// TO-DO: Exception own chess
 		
+		boolean isSameXPos = moveTo.charAt(0)==position.charAt(0);
+		int xPosDiff = moveTo.charAt(0)-position.charAt(0);
+		int yPosDiff = moveTo.charAt(1)-position.charAt(1);
+		
 		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();
+		
+		//pawn can only move forward
 		if(CMS.getChessPiece(moveTo)==null)
 		{
-			//special move at initial position
-			if (position.charAt(1)==initialYPos1 ||
-					position.charAt(1)==initialYPos2)
+			if (isSameXPos && !isBlocked(moveTo) && isForwardMove(moveTo))
 			{
-				if (moveTo.charAt(0)==position.charAt(0) &&
-						Math.abs(moveTo.charAt(1)-position.charAt(1))==2)
+				//special move: 2 grids forward at initial position
+				if (position.charAt(1)==initialYPos1 || position.charAt(1)==initialYPos2)
+				{
+					if (Math.abs(yPosDiff)==2)
+						return true;
+				}
+				
+				//other moves: 1 grid forward
+				if (Math.abs(yPosDiff)==1)
 					return true;
 			}
-			
-			//other moves
-			if (moveTo.charAt(0)==position.charAt(0) && 
-					Math.abs(moveTo.charAt(1)-position.charAt(1))==1)
-				return true;
 		}
 		else 
 		{
 			//pawn can only capture pieces in the front diagonally
-			if (CMS.getChessPiece(moveTo).getPlayer()!=this.player) 
+			if (CMS.getChessPiece(moveTo).getPlayer()!=this.player && isForwardMove(moveTo))
 			{
-				int playerId = this.player.getPlayerId();
-				int xPosDiff = moveTo.charAt(0)-position.charAt(0);
-				int yPosDiff = moveTo.charAt(1)-position.charAt(1);
 				boolean isValidPosDiff = Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==1; //x and y position diff. in 1
 				if (isValidPosDiff)
-				{
-					if ((playerId==1 && yPosDiff>0) ||	//player1's pawn: new yPos always larger  
-							(playerId==2 && yPosDiff<0))	//player2's pawn: new yPos always smaller
-						return true;
-				}
+					return true;
 			}
 		}
 		
+		return false;
+	}
+	
+	//pawn can only move forward
+	private boolean isForwardMove(String moveTo) {
+		int yPosDiff = moveTo.charAt(1)-position.charAt(1);
+		int playerId = this.player.getPlayerId();
+		
+		if ((playerId==1 && yPosDiff>0) ||	//player1's pawn: new yPos always larger  
+				(playerId==2 && yPosDiff<0))	//player2's pawn: new yPos always smaller
+			return true;
+		
+		return false;
+	}
+
+	//check whether block by own piece or opponent's piece
+	private boolean isBlocked(String moveTo) { 
+		ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
+		int yPosDiff = moveTo.charAt(1)-position.charAt(1);
+		
+		if (yPosDiff>1)
+		{
+			for (int i = 0; i<2; i++)
+			{
+				String tempPos = ""+position.charAt(0)+(String.valueOf(position.charAt(1))+i+1);
+				if (cms.getChessPiece(tempPos)!=null)
+					return true;
+			}
+		}
 		return false;
 	}
 	
