@@ -21,6 +21,10 @@ public class ChessMonitoringSystem {
 		
 		return instance; 
 	}
+	
+	public void initializeChessBoard() {
+		throw new UnsupportedOperationException();		
+	}
 
 	public void initializeChessPieces(ChessPlayer player1, ChessPlayer player2) {
 		// TODO - implement ChessMonitoringSystem.initializeChessPieces
