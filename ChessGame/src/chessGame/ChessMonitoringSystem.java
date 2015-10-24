@@ -8,10 +8,13 @@ public class ChessMonitoringSystem {
 	private static ChessMonitoringSystem instance;
 	private GameMode mode;
 
-	private ChessMonitoringSystem() {
-		// TODO - implement ChessMonitoringSystem.ChessMonitoringSystem
-	}
+	private ChessMonitoringSystem() {}
 
+	//for JUnit testing, may consider for setting up chess problem
+	public void setAllChessPieces(ArrayList<ChessPiece> allChessPieces) {
+		ChessMonitoringSystem.allChessPieces = allChessPieces;
+	}
+	
 	public static ChessMonitoringSystem getInstance() {
 		if (instance==null)
 			instance = new ChessMonitoringSystem();
@@ -112,10 +115,18 @@ public class ChessMonitoringSystem {
 		}
 		else if(movingChess.isValidMove(newPos)) {
 			if(getChessPiece(newPos)!=null) {
-				int rank = compareRank(movingChess, getChessPiece(newPos));
-				int[] score={getChessPiece(newPos).getScore(), rank};
-				mode.addScore(player, score);
-				removeChessPiece(newPos);
+				if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
+				{
+					int rank = compareRank(movingChess, getChessPiece(newPos));
+					int[] score={getChessPiece(newPos).getScore(), rank};
+					mode.addScore(player, score);
+					removeChessPiece(newPos);
+				}
+				else //capturing own chess
+				{
+	          		System.out.println("You cannot capture own piece¡I");
+	          		return false;
+				}
 			}
 			movingChess.updatePosition(newPos);
 			return true;
@@ -161,7 +172,6 @@ public class ChessMonitoringSystem {
 	*/
 
 	private void removeChessPiece(String position) {
-		// TODO - implement ChessMonitoringSystem.removeChessPiece
 		ChessPiece target = getChessPiece(position);
 		//target.updatePosition(null);	
 		allChessPieces.remove(target); //IF USE ARRAYLIST

@@ -26,8 +26,8 @@ public abstract class ChessPiece {
 	
 	public abstract int getScore();
 	
-	@Override
-	public abstract String toString();
+//	@Override
+//	public abstract String toString();
 
 	public abstract int getRank();
 }

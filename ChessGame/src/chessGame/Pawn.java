@@ -42,7 +42,8 @@ public class Pawn extends ChessPiece {
 		else 
 		{
 			//pawn can only capture pieces in the front diagonally
-			if (CMS.getChessPiece(moveTo).getPlayer()!=this.player && isForwardMove(moveTo))
+			//left for CMS standard checking own chess: CMS.getChessPiece(moveTo).getPlayer()!=this.player && 
+			if (isForwardMove(moveTo))
 			{
 				boolean isValidPosDiff = Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==1; //x and y position diff. in 1
 				if (isValidPosDiff)
