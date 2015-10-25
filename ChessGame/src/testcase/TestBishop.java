@@ -17,16 +17,14 @@ import chessGame.Bishop;
 import junit.framework.TestCase;
 
 public class TestBishop extends TestCase{
-	private ChessMonitoringSystem cms;
+	private ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
 	
     /**
      * Sets up the test fixture.
      *
      * Called before every test case method.
      */
-	public void setUp() {
-		cms = ChessMonitoringSystem.getInstance();
-	}
+	public void setUp() {}
 
     /**
      * Tears down the test fixture.
@@ -38,20 +36,8 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop's diagonal move, c1->a3
 	public void testPlayer1BishopNormalMove() {
-		class BishopTestStub extends Bishop {
-			public BishopTestStub(ChessPlayer player, String position) {
-				super(player, position);
-			}
-		}
-		
-		class PlayerTestStub extends ChessPlayer {
-			public PlayerTestStub(String playerName, int id) {
-				super(playerName, id);
-			}
-		}
-		
 		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		BishopTestStub bishopStub = new BishopTestStub(new PlayerTestStub("John", 1), "c1");
+		Bishop bishopStub = new Bishop(new ChessPlayer("John", 1), "c1");
 		allChessPieces.add(bishopStub);
 		cms.setAllChessPieces(allChessPieces);
 		boolean moveResult = bishopStub.isValidMove("a3");
@@ -61,21 +47,9 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop's blocked move, c1->a3 and b2 blocked
 	public void testPlayer1BishopBlockedMove() {
-		class BishopTestStub extends Bishop {
-			public BishopTestStub(ChessPlayer player, String position) {
-				super(player, position);
-			}
-		}
-		
-		class PlayerTestStub extends ChessPlayer {
-			public PlayerTestStub(String playerName, int id) {
-				super(playerName, id);
-			}
-		}
-		
 		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		BishopTestStub bishopStub = new BishopTestStub(new PlayerTestStub("John", 1), "c1");
-		BishopTestStub blockedStub = new BishopTestStub(new PlayerTestStub("John", 1), "b2");
+		Bishop bishopStub = new Bishop(new ChessPlayer("John", 1), "c1");
+		Bishop blockedStub = new Bishop(new ChessPlayer("John", 1), "b2");
 		allChessPieces.add(bishopStub);
 		allChessPieces.add(blockedStub);
 		cms.setAllChessPieces(allChessPieces);
@@ -83,4 +57,17 @@ public class TestBishop extends TestCase{
 		assertEquals(moveResult, false);
 	}
 	
+	@Test
+	public void testPlayer1PrintBishop() {
+		Bishop bishop = new Bishop(new ChessPlayer("John", 1), null);
+		String stringResult = bishop.toString();
+		assertEquals(stringResult, "B");
+	}
+	
+	@Test
+	public void testPlayer2PrintBishop() {
+		Bishop bishop = new Bishop(new ChessPlayer("John", 2), null);
+		String stringResult = bishop.toString();
+		assertEquals(stringResult, "b");
+	}
 }
