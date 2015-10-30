@@ -99,13 +99,9 @@ public class ChessMonitoringSystem {
 	}
 
 	public boolean moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
-		/*----------------------------------------------
-		 * BELOW CODE DO ONLY ILLUSTRATE THE CONCEPT
-		 *----------------------------------------------*/
-		
 		ChessPiece movingChess = getChessPiece(oldPos);
 		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
-		if(movingChess == null){
+		/*if(movingChess == null){
 			System.out.println("Chesspiece not found!");
 			return false;
 		}
@@ -114,30 +110,50 @@ public class ChessMonitoringSystem {
       			return false;
 		}
 		else if(movingChess.isValidMove(newPos)) {
-			if(getChessPiece(newPos)!=null) {
-				if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
-				{
-					int rank = compareScore(movingChess, getChessPiece(newPos));
-					int[] score={getChessPiece(newPos).getScore(), rank};
-					mode.addScore(player, score);
-					removeChessPiece(newPos);
-				}
-				else //capturing own chess
-				{
-	          		System.out.println("You cannot capture own piece¡I");
-	          		return false;
-				}
-			}
-			movingChess.updatePosition(newPos);
-			return true;
+			boolean move=move(player, newPos, movingChess);
+			return move;
 		}
         else{
           		System.out.println("The move is invalid.");
           		return false;
-        }
+        }*/
+		if (movingChess == null){
+			System.out.println("Chesspiece not found!");
+			return false;
+		}
+		if(movingChess.isValidMove(newPos)){
+			boolean move=move(player, newPos, movingChess);
+			return move;
+		}
+		else {
+			if (movingChess.getPlayer()!=player)
+				System.out.println("Selected piece does not belong to you!");
+			else
+				System.out.println("The move is invalid.");
+      		return false;
+		}
 	}
 
-	public int compareScore(ChessPiece move, ChessPiece old){
+	private boolean move(ChessPlayer player, String newPos, ChessPiece movingChess) {
+		if(getChessPiece(newPos)!=null) {
+			if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
+			{
+				int rank = compareScore(movingChess, getChessPiece(newPos));
+				int[] score={getChessPiece(newPos).getScore(), rank};
+				mode.addScore(player, score);
+				removeChessPiece(newPos);
+			}
+			else //capturing own chess
+			{
+		  		System.out.println("You cannot capture own pieceÂ¡I");
+		  		return false;
+			}
+		}
+		movingChess.updatePosition(newPos);
+		return true;
+	}
+
+	private int compareScore(ChessPiece move, ChessPiece old){
 		if (move.getScore() > old.getScore())
 			return 0;
 		else if (old.getScore() > move.getScore())
@@ -210,8 +226,6 @@ public class ChessMonitoringSystem {
 		}
 		if (counter ==2)
 			return null;
-		else
-			return winner;
+		return winner;
 	}
-
 }
