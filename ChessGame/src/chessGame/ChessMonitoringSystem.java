@@ -117,14 +117,14 @@ public class ChessMonitoringSystem {
 			if(getChessPiece(newPos)!=null) {
 				if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
 				{
-					int rank = compareRank(movingChess, getChessPiece(newPos));
+					int rank = compareScore(movingChess, getChessPiece(newPos));
 					int[] score={getChessPiece(newPos).getScore(), rank};
 					mode.addScore(player, score);
 					removeChessPiece(newPos);
 				}
 				else //capturing own chess
 				{
-	          		System.out.println("You cannot capture own piece¡I");
+	          		System.out.println("You cannot capture own pieceÂ¡I");
 	          		return false;
 				}
 			}
@@ -137,10 +137,10 @@ public class ChessMonitoringSystem {
         }
 	}
 
-	public int compareRank(ChessPiece move, ChessPiece old){
-		if (move.getRank() > old.getRank())
+	public int compareScore(ChessPiece move, ChessPiece old){
+		if (move.getScore() > old.getScore())
 			return 0;
-		else if (old.getRank() > move.getRank())
+		else if (old.getScore() > move.getScore())
 			return 1;
 		else
 			return 2;
