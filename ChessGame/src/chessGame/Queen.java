@@ -2,7 +2,6 @@ package chessGame;
 
 public class Queen extends ChessPiece {
 	private final int score=90;
-	private final int rank=5;
 	
 	public Queen(ChessPlayer player, String position) {
 		super(player, position);	
@@ -173,9 +172,4 @@ public class Queen extends ChessPiece {
 			return null;
 	}
 
-	@Override
-	public int getRank() {
-		// TODO Auto-generated method stub
-		return rank;
-	}
 }
