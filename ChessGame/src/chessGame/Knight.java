@@ -3,7 +3,6 @@ package chessGame;
 public class Knight extends ChessPiece {
 
 	private final int score=20;
-	private final int rank=2;
 	
 	public Knight(ChessPlayer player, String position) {
 		super(player, position);	
@@ -42,8 +41,4 @@ public class Knight extends ChessPiece {
 			return null;
 	}
 
-	@Override
-	public int getRank() {
-		return rank;
-	}
 }
