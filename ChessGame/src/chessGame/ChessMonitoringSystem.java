@@ -9,11 +9,6 @@ public class ChessMonitoringSystem {
 	private GameMode mode;
 
 	private ChessMonitoringSystem() {}
-
-	//for JUnit testing, may consider for setting up chess problem
-	public void setAllChessPieces(ArrayList<ChessPiece> allChessPieces) {
-		ChessMonitoringSystem.allChessPieces = allChessPieces;
-	}
 	
 	public static ChessMonitoringSystem getInstance() {
 		if (instance==null)
@@ -22,9 +17,10 @@ public class ChessMonitoringSystem {
 		return instance; 
 	}
 	
-	public void initializeChessBoard() {
-	
-	}
+//	not using
+//	public void initializeChessBoard() {
+//	
+//	}
 
 	public void initializeChessPieces(ChessPlayer player1, ChessPlayer player2) {
 		allChessPieces=new ArrayList<>();
@@ -145,7 +141,7 @@ public class ChessMonitoringSystem {
 			}
 			else //capturing own chess
 			{
-		  		System.out.println("You cannot capture own pieceÂ¡I");
+		  		System.out.println("You cannot capture own piece!");
 		  		return false;
 			}
 		}
@@ -190,7 +186,7 @@ public class ChessMonitoringSystem {
 	private void removeChessPiece(String position) {
 		ChessPiece target = getChessPiece(position);
 		//target.updatePosition(null);	
-		allChessPieces.remove(target); //IF USE ARRAYLIST
+		allChessPieces.remove(target);
 	}
 
 	public boolean endGame() {

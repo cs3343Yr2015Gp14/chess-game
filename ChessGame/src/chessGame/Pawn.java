@@ -13,13 +13,15 @@ public class Pawn extends ChessPiece {
 		
 		// TO-DO: add Exception out of the board scope 
 		// throw new UnsupportedOperationException();
-		// TO-DO: Exception own chess
 		
 		boolean isSameXPos = moveTo.charAt(0)==position.charAt(0);
 		int xPosDiff = moveTo.charAt(0)-position.charAt(0);
 		int yPosDiff = moveTo.charAt(1)-position.charAt(1);
 		
 		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();
+		
+		if(position==moveTo)
+			return false;
 		
 		//pawn can only move forward
 		if(CMS.getChessPiece(moveTo)==null)
@@ -41,8 +43,7 @@ public class Pawn extends ChessPiece {
 		else 
 		{
 			//pawn can only capture pieces in the front diagonally
-			//left for CMS standard checking own chess: CMS.getChessPiece(moveTo).getPlayer()!=this.player && 
-			if (isForwardMove(moveTo))
+			if (CMS.getChessPiece(moveTo).getPlayer()!=this.player && isForwardMove(moveTo))
 			{
 				boolean isValidPosDiff = Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==1; //x and y position diff. in 1
 				if (isValidPosDiff)
@@ -74,7 +75,7 @@ public class Pawn extends ChessPiece {
 		{
 			for (int i = 0; i<2; i++)
 			{
-				String tempPos = ""+position.charAt(0)+(String.valueOf(position.charAt(1))+i+1);
+				String tempPos = ""+position.charAt(0)+(char)(position.charAt(1)+i+1);
 				if (cms.getChessPiece(tempPos)!=null)
 					return true;
 			}

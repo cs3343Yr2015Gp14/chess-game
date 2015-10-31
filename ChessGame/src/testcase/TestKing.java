@@ -35,61 +35,94 @@ public class TestKing extends TestCase{
 	public void tearDown() {}
 	
 	@Test
-	//Test case: test Player 1 for King's forward move, d1->d2
-	public void testPlayer1KingForwardMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		King kingStub = new King(new ChessPlayer("John", 1), "d1");
-		allChessPieces.add(kingStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = kingStub.isValidMove("d2");
+	//Test case: test Player 1 for King move to current position, king d3->d4
+	public void testPlayer1KingMoveToCurrentPos() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd1 = cms.getChessPiece("d1");
+		boolean moveResult = kingAtd1.isValidMove("d1");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test Player 1 for King's vertical move, king d3->d4
+	public void testPlayer1KingVerticalMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd1 = cms.getChessPiece("d1");
+		kingAtd1.updatePosition("d3");
+		
+		boolean moveResult = kingAtd1.isValidMove("d4");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
-	//Test case: test for Player 1 King's backward move, d2->d1
-	public void testPlayer1KingBackwardMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		King kingStub = new King(new ChessPlayer("John", 1), "d2");
-		allChessPieces.add(kingStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = kingStub.isValidMove("d1");
+	//Test case: test for Player 1 King's horizontal move, king d3->c3
+	public void testPlayer1KingHorizontalMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd2 = cms.getChessPiece("d1");
+		kingAtd2.updatePosition("d3");
+		
+		boolean moveResult = kingAtd2.isValidMove("c3");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
-	//Test case: test for Player 1 King's diagonal move to top left, d1->c2
+	//Test case: test for Player 1 King's diagonal move to top left, d3->c4
 	public void testPlayer1KingTopLeftMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		King kingStub = new King(new ChessPlayer("John", 1), "d1");
-		allChessPieces.add(kingStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = kingStub.isValidMove("c2");
-		assertEquals(moveResult, true);
-	}
-	
-	@Test
-	//Test case: test for Player 1 King's capturing enemy, d1->c2
-	public void testPlayer1KingCaptureEnemy() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		King kingStub = new King(new ChessPlayer("John", 1), "d1");
-		King captureStub = new King(new ChessPlayer("John", 2), "c2");
-		allChessPieces.add(kingStub);
-		allChessPieces.add(captureStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = kingStub.isValidMove("c2");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd1 = cms.getChessPiece("d1");
+		kingAtd1.updatePosition("d3");
+		
+		boolean moveResult = kingAtd1.isValidMove("c4");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
 	//Test case: test for Player 1 King's capturing own, d1->c2
 	public void testPlayer1KingCaptureOwn() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		King kingStub = new King(new ChessPlayer("John", 1), "d1");
-		King captureStub = new King(new ChessPlayer("John", 1), "c2");
-		allChessPieces.add(kingStub);
-		allChessPieces.add(captureStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = kingStub.isValidMove("c2");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd1 = cms.getChessPiece("d1");
+		boolean moveResult = kingAtd1.isValidMove("c2");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 King's capturing enemy, d6->d7
+	public void testPlayer1KingCaptureEnemy() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd1 = cms.getChessPiece("d1");
+		kingAtd1.updatePosition("d6");
+
+		boolean moveResult = kingAtd1.isValidMove("d7");
+		assertEquals(moveResult, true);
+	}
+	
+	@Test
+	//Test case: test for Player 1 King's invalid move, d1->c6
+	public void testPlayer1KingInvalidMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece kingAtd1 = cms.getChessPiece("d1");
+		boolean moveResult = kingAtd1.isValidMove("c6");
 		assertEquals(moveResult, false);
 	}
 	

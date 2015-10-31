@@ -11,7 +11,6 @@ public class Knight extends ChessPiece {
 	public boolean isValidMove(String moveTo) {
 		// TO-DO: add Exception out of the board scope 
 		// throw new UnsupportedOperationException();
-		// TO-DO: Exception own chess
 		
 		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();
 		if(CMS.getChessPiece(moveTo)==null || 
@@ -19,9 +18,9 @@ public class Knight extends ChessPiece {
 		{
 			int xPosDiff = moveTo.charAt(0)-position.charAt(0);
 			int yPosDiff = moveTo.charAt(1)-position.charAt(1);
-			if (Math.abs(xPosDiff)==2 && Math.abs(yPosDiff)==1)
+			if (Math.abs(xPosDiff)==2 && Math.abs(yPosDiff)==1) //vertical move
 				return true;
-			else if (Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==2)
+			else if (Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==2) //horizontal move
 				return true;
 		}
 		return false;

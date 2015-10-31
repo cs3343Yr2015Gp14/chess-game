@@ -36,7 +36,7 @@ public class Rook extends ChessPiece {
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece(position.charAt(0)+String.valueOf((position.charAt(1)-i)));//wrong formatting
+						tempChess=CMS.getChessPiece(""+position.charAt(0)+(char)(position.charAt(1)-i));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
@@ -48,7 +48,7 @@ public class Rook extends ChessPiece {
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece(position.charAt(0)+String.valueOf((position.charAt(1)+i)));//wrong formatting
+						tempChess=CMS.getChessPiece(""+position.charAt(0)+(char)(position.charAt(1)+i));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
@@ -68,7 +68,7 @@ public class Rook extends ChessPiece {
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)(position.charAt(0)-i)+Integer.toString(position.charAt(1)));//wrong formatting
+						tempChess=CMS.getChessPiece(""+(char)(position.charAt(0)-i)+position.charAt(1));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
@@ -80,7 +80,7 @@ public class Rook extends ChessPiece {
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)(position.charAt(0)+i)+Integer.toString(position.charAt(1)));//wrong formatting
+						tempChess=CMS.getChessPiece(""+(char)(position.charAt(0)+i)+position.charAt(1));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	

@@ -35,37 +35,120 @@ public class TestRook extends TestCase{
 	public void tearDown() {}
 	
 	@Test
-	//Test case: test for Player 1 rook's vertical move, a1->a3
-	public void testPlayer1RookVerticalMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Rook rookStub = new Rook(new ChessPlayer("John", 1), "a1");
-		allChessPieces.add(rookStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = rookStub.isValidMove("a3");
+	//Test case: test for Player 1 rook move to current position, a3->a6
+	public void testPlayer1RookMoveToCurrentPos() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		boolean moveResult = rookAta1.isValidMove("a1");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 rook's vertical move, a3->a6
+	public void testPlayer1RookVerticalUpMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("a3");
+		
+		boolean moveResult = rookAta1.isValidMove("a6");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
-	//Test case: test for Player 1 rook's horizontal move, a1->d1
-	public void testPlayer1RookHorizontalMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Rook rookStub = new Rook(new ChessPlayer("John", 1), "a1");
-		allChessPieces.add(rookStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = rookStub.isValidMove("d1");
+	//Test case: test for Player 1 rook's vertical move, a6->a3
+	public void testPlayer1RookVerticalDownMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("a6");
+		
+		boolean moveResult = rookAta1.isValidMove("a3");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
-	//Test case: test for Player 1 rook's blocked move, a1->d1 and c1 blocked
+	//Test case: test for Player 1 rook's horizontal move, h3->a3
+	public void testPlayer1RookHorizontalLeftMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("h3");
+		
+		boolean moveResult = rookAta1.isValidMove("a3");
+		assertEquals(moveResult, true);
+	}
+	
+	@Test
+	//Test case: test for Player 1 rook's horizontal move, a3->h3
+	public void testPlayer1RookHorizontalRightMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("a3");
+		
+		boolean moveResult = rookAta1.isValidMove("h3");
+		assertEquals(moveResult, true);
+	}
+	
+	@Test
+	//Test case: test for Player 1 rook's blocked move, a1->a3, a2 blocked
 	public void testPlayer1RookBlockedMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Rook rookStub = new Rook(new ChessPlayer("John", 1), "a1");
-		Rook blockStub = new Rook(new ChessPlayer("John", 1), "c1");
-		allChessPieces.add(rookStub);
-		allChessPieces.add(blockStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = rookStub.isValidMove("d1");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		boolean moveResult = rookAta1.isValidMove("a3");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 rook's capturing opponent's piece, a3->a7
+	public void testPlayer1RookCaptureEnemy() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("a3");
+		
+		boolean moveResult = rookAta1.isValidMove("a7");
+		assertEquals(moveResult, true);
+	}
+	
+	@Test
+	//Test case: test for Player 1 rook's capturing own piece, a1->a2
+	public void testPlayer1RookCaptureOwn() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		boolean moveResult = rookAta1.isValidMove("a2");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 rook's invalid move, a1->b6
+	public void testPlayer1RookInvalidMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		boolean moveResult = rookAta1.isValidMove("b6");
 		assertEquals(moveResult, false);
 	}
 	

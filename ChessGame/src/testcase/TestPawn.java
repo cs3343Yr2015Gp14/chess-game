@@ -35,74 +35,109 @@ public class TestPawn extends TestCase{
 	public void tearDown() {}
 	
 	@Test
+	//Test case: test for Player 1 pawn move to current position, a2->a4
+	public void testPlayer1PawnMoveToCurrentPos() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("a2");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
 	//Test case: test for Player 1 pawn's special move, a2->a4
 	public void testPlayer1PawnSpecialMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Pawn pawnStub = new Pawn(new ChessPlayer("John", 1), "a2");
-		allChessPieces.add(pawnStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = pawnStub.isValidMove("a4");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("a4");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
 	//Test case: test for Player 1 pawn's normal move, a2->a3
 	public void testPlayer1PawnForwardMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Pawn pawnStub = new Pawn(new ChessPlayer("John", 1), "a2");
-		allChessPieces.add(pawnStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = pawnStub.isValidMove("a3");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("a3");
 		assertEquals(moveResult, true);
 	}
 
 	@Test
-	//Test case: test for Player 1 pawn's capturing enemy, a2->b3
+	//Test case: test for Player 1 pawn's capturing enemy, a6->b7
 	public void testPlayer1PawnCaptureEnemy() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Pawn pawnStub = new Pawn(new ChessPlayer("John", 1), "a2");
-		Pawn captureStub = new Pawn(new ChessPlayer("John", 2), "b3");
-		allChessPieces.add(pawnStub);
-		allChessPieces.add(captureStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = pawnStub.isValidMove("b3");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		pawnAta2.updatePosition("a6");
+		
+		boolean moveResult = pawnAta2.isValidMove("b7");
 		assertEquals(moveResult, true);
 	}
 	
 	@Test
-	//Test case: test for Player 1 pawn's capturing own, a2->b3
+	//Test case: test for Player 1 pawn's capturing own, pawn b2->b3, pawn a2->b3
 	public void testPlayer1PawnCaptureOwn() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Pawn pawnStub = new Pawn(new ChessPlayer("John", 1), "a2");
-		Pawn captureStub = new Pawn(new ChessPlayer("John", 1), "b3");
-		allChessPieces.add(pawnStub);
-		allChessPieces.add(captureStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = pawnStub.isValidMove("b3");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece ownPiece = cms.getChessPiece("b2");
+		ownPiece.updatePosition("b3");
+		
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("b3");
 		assertEquals(moveResult, false);
 	}
 	
 	@Test
-	//Test case: test for Player 1 pawn's backward move, a4->b3
+	//Test case: test for Player 1 pawn's backward move, rook a1->a3, a2->a1
 	public void testPlayer1PawnBackwardMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Pawn pawnStub = new Pawn(new ChessPlayer("John", 1), "a4");
-		allChessPieces.add(pawnStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = pawnStub.isValidMove("b3");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("a3");
+		
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("a1");
 		assertEquals(moveResult, false);
 	}
 	
 	@Test
-	//Test case: test for Player 1 pawn's blocked move, a2->a3 and a3 blocked
+	//Test case: test for Player 1 pawn's backward move, a2->h6
+	public void testPlayer1PawnInvalidMove() {
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("h6");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 pawn's blocked move, pawn a2->a3 and a3 blocked
 	public void testPlayer1PawnBlockedMove() {
-		ArrayList<ChessPiece> allChessPieces = new ArrayList<>();
-		Pawn pawnStub = new Pawn(new ChessPlayer("John", 1), "a2");
-		Pawn blockStub = new Pawn(new ChessPlayer("John", 1), "a3");
-		allChessPieces.add(pawnStub);
-		allChessPieces.add(blockStub);
-		cms.setAllChessPieces(allChessPieces);
-		boolean moveResult = pawnStub.isValidMove("a3");
+		ChessPlayer player1 = new ChessPlayer("John", 1);
+		ChessPlayer player2 = new ChessPlayer("John", 2);
+		cms.initializeChessPieces(player1, player2);
+		
+		ChessPiece rookAta1 = cms.getChessPiece("a1");
+		rookAta1.updatePosition("a3");
+		
+		ChessPiece pawnAta2 = cms.getChessPiece("a2");
+		boolean moveResult = pawnAta2.isValidMove("a3");
 		assertEquals(moveResult, false);
 	}
 	

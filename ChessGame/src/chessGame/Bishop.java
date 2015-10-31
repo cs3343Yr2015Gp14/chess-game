@@ -30,60 +30,52 @@ public class Bishop extends ChessPiece {
 			int xPosDiff = position.charAt(0)-moveTo.charAt(0);
 			int yPosDiff = position.charAt(1)-moveTo.charAt(1);
 			
-			if(Math.abs(yPosDiff)==
-					Math.abs(xPosDiff))
+			if(Math.abs(yPosDiff)==Math.abs(xPosDiff))
 			{
 				// top left corner
-				if(xPosDiff>0 &&
-						yPosDiff<0)	
+				if(xPosDiff>0 && yPosDiff<0)	
 				{
 					numOfMoves=xPosDiff;
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						String yPosString = String.valueOf(position.charAt(1)+i);
-						tempChess=CMS.getChessPiece((char)(position.charAt(0)-i)+yPosString);//wrong formatting
+						tempChess=CMS.getChessPiece(""+(char)(position.charAt(0)-i)+(char)(position.charAt(1)+i));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// lower left corner
-				if(xPosDiff>0 &&
-						yPosDiff>0)	
+				if(xPosDiff>0 && yPosDiff>0)	
 				{
 					numOfMoves=xPosDiff;
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						String yPosString = String.valueOf(position.charAt(1)-i);
-						tempChess=CMS.getChessPiece((char)(position.charAt(0)-i)+yPosString);//wrong formatting
+						tempChess=CMS.getChessPiece(""+(char)(position.charAt(0)-i)+(char)(position.charAt(1)-i));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// top right corner
-				if(xPosDiff<0 &&
-						yPosDiff<0)	
+				if(xPosDiff<0 && yPosDiff<0)	
 				{
 					numOfMoves=(moveTo.charAt(0)-position.charAt(0));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						String yPosString = String.valueOf(position.charAt(1)+i);
-						tempChess=CMS.getChessPiece((char)(position.charAt(0)+i)+yPosString);//wrong formatting
+						tempChess=CMS.getChessPiece(""+(char)(position.charAt(0)+i)+(char)(position.charAt(1)+i));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
 				}
 				// lower right corner
-				if(xPosDiff<0 &&
-						yPosDiff>0)	
+				if(xPosDiff<0 && yPosDiff>0)	
 				{
 					numOfMoves=(moveTo.charAt(1)-position.charAt(1));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
-						tempChess=CMS.getChessPiece((char)(position.charAt(0)+i)+String.valueOf((position.charAt(1)-i)));//wrong formatting
+						tempChess=CMS.getChessPiece(""+(char)(position.charAt(0)+i)+(char)((position.charAt(1)-i)));//wrong formatting
 						if(tempChess!=null)
 							isBlocked=true;
 					}	
