@@ -96,26 +96,46 @@ public class ChessMonitoringSystem {
 
 	public boolean moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
 		ChessPiece movingChess = getChessPiece(oldPos);
-		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
-		if(movingChess == null){
-			System.out.println("Chesspiece not found!");
+		/*ERROR-CATCHING : IMPLEMENTED
+		 * NOTE:EXCEPTIONS SUCH AS ExOwnChessCaptured ARE NOT BEING USED
+		 * MAY REMOVE AS RESULT OF REFACTOR
+		 * OR TO BE USED BY CLASSES OF CHESSPIECE
+		 */
+		
+		try {
+			if (movingChess != null) {
+				if (movingChess.getPlayer()==player) {
+					if(movingChess.isValidMove(newPos)) {
+						boolean move = move(player, newPos, movingChess);
+						return move;
+					}
+						
+					else
+						throw new ExInvalidMove();
+				}
+				else
+					throw new ExEnemyChessSelected();
+			}
+			else {
+				throw new ExNullMovingChess();
+			}
+		} catch (ExNullMovingChess e) {
+			System.out.println("["+e.getMessage()+"]");
+			return false;
+		} catch (ExOwnChessCaptured e) {
+			System.out.println("["+e.getMessage()+"]");
+			return false;
+		} catch (ExEnemyChessSelected e) {
+			System.out.println("["+e.getMessage()+"]");
+			return false;
+		} catch (ExInvalidMove e) {
+			System.out.println("["+e.getMessage()+"]");
 			return false;
 		}
-		else if(movingChess.getPlayer()!=player){
-      			System.out.println("Selected piece does not belong to you!");
-      			return false;
-		}
-		else if(movingChess.isValidMove(newPos)) {
-			boolean move=move(player, newPos, movingChess);
-			return move;
-		}
-        	else{
-          		System.out.println("The move is invalid.");
-          		return false;
-        	}
+
 	}
 
-	private boolean move(ChessPlayer player, String newPos, ChessPiece movingChess) {
+	private boolean move(ChessPlayer player, String newPos, ChessPiece movingChess) throws ExNullMovingChess, ExOwnChessCaptured {
 		if(getChessPiece(newPos)!=null) {
 			if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
 			{
@@ -125,11 +145,10 @@ public class ChessMonitoringSystem {
 				removeChessPiece(newPos);
 			}
 			else //capturing own chess
-			{
-		  		System.out.println("You cannot capture own piece!");
-		  		return false;
-			}
+		  		throw new ExOwnChessCaptured();
+			
 		}
+		
 		movingChess.updatePosition(newPos);
 		return true;
 	}
@@ -154,20 +173,6 @@ public class ChessMonitoringSystem {
 		return null;
 	}
 	
-	
-	
-	/*Stub
-	private boolean isChessPieceCaptured(ChessPiece origin,String position) {
-		// TODO - implement ChessMonitoringSystem.chessPieceIsCaptured
-		ChessPiece target = getChessPiece(position);
-		
-		if(origin.getPlayer()!=target.getPlayer())
-			return true;
-		else
-			return false;
-	}
-	*/
-
 	private void removeChessPiece(String position) {
 		ChessPiece target = getChessPiece(position);
 		//target.updatePosition(null);	
