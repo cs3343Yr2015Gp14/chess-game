@@ -97,7 +97,7 @@ public class ChessMonitoringSystem {
 	public boolean moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
 		ChessPiece movingChess = getChessPiece(oldPos);
 		/*ERROR-CATCHING : MAY CHANGE TO TRY-CATCH CLAUSE*/
-		/*if(movingChess == null){
+		if(movingChess == null){
 			System.out.println("Chesspiece not found!");
 			return false;
 		}
@@ -109,25 +109,10 @@ public class ChessMonitoringSystem {
 			boolean move=move(player, newPos, movingChess);
 			return move;
 		}
-        else{
+        	else{
           		System.out.println("The move is invalid.");
           		return false;
-        }*/
-		if (movingChess == null){
-			System.out.println("Chesspiece not found!");
-			return false;
-		}
-		if(movingChess.isValidMove(newPos)){
-			boolean move=move(player, newPos, movingChess);
-			return move;
-		}
-		else {
-			if (movingChess.getPlayer()!=player)
-				System.out.println("Selected piece does not belong to you!");
-			else
-				System.out.println("The move is invalid.");
-      		return false;
-		}
+        	}
 	}
 
 	private boolean move(ChessPlayer player, String newPos, ChessPiece movingChess) {
