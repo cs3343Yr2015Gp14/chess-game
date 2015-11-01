@@ -1,5 +1,5 @@
 /**
- * @author PP
+ * @author 
  *
  */
 package testcase;
@@ -38,7 +38,7 @@ public class TestChessPiece extends TestCase{
      */
 	public void tearDown() {}
 	
-	@Test
+/*	@Test
 	public void testToString() {
 		//set 2 players
 		int numOfPlayer=2;
@@ -67,4 +67,5 @@ public class TestChessPiece extends TestCase{
 			assertEquals(""+(char)(66+j),bishop.toString());
 		}
 	}
+*/
 }
