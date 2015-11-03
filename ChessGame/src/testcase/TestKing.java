@@ -115,15 +115,34 @@ public class TestKing extends TestCase{
 	}
 	
 	@Test
-	//Test case: test for Player 1 King's invalid move, d1->c6
-	public void testPlayer1KingInvalidMove() {
+	//Test case: test for Player 1 King's invalid move
+	//	d3->d6(true && false)
+	//	d3->b3(true && false)
+	//	d3->a4(true && false)
+	public void testPlayer1KingInvalidMoves() {
 		ChessPlayer player1 = new ChessPlayer("John", 1);
 		ChessPlayer player2 = new ChessPlayer("John", 2);
 		cms.initializeChessPieces(player1, player2);
 		
 		ChessPiece kingAtd1 = cms.getChessPiece("d1");
-		boolean moveResult = kingAtd1.isValidMove("c6");
-		assertEquals(moveResult, false);
+		kingAtd1.updatePosition("d3");
+		boolean moveResult = kingAtd1.isValidMove("d6");
+		assertEquals(moveResult, false);	//	d3->d6(true && false)
+
+		kingAtd1.updatePosition("d3");
+		boolean moveResult2 = kingAtd1.isValidMove("b3");
+		assertEquals(moveResult2, false);	//	d3->b3(true && false)
+		
+		kingAtd1.updatePosition("d3");
+		boolean moveResult3 = kingAtd1.isValidMove("a4");
+		assertEquals(moveResult3, false);	//	d3->a4(true && false)
+	}
+	
+	@Test
+	public void testKingGetScore() {
+		King king = new King(new ChessPlayer("John", 1), null);
+		int score = king.getScore();
+		assertEquals(score, 150);
 	}
 	
 	@Test

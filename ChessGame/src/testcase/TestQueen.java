@@ -13,6 +13,7 @@ import org.junit.Test;
 import chessGame.ChessMonitoringSystem;
 import chessGame.ChessPiece;
 import chessGame.ChessPlayer;
+import chessGame.Knight;
 import chessGame.Pawn;
 import chessGame.Queen;
 import junit.framework.TestCase;
@@ -185,15 +186,56 @@ public class TestQueen extends TestCase{
 	}
 	
 	@Test
-	//Test case: test Player 1 for Queen's capturing own, e1->c3 and d2 is blocked
-	public void testPlayer1QueenBlockedMove() {
+	//Test case: test Player 1 for Queen's capturing own
+	//	e1->c3 and d2 is blocked (top left)
+	//	e1->e3 and e2 is blocked (forward)
+	//	e1->g3 and f2 is blocked (top right)
+	//	e1->c1 and d1 is blocked (left)
+	//	e1->g1 and f1 is blocked (right)
+	//	g3->e1 and f2 is blocked (lower left)
+	//	e3->e1 and e2 is blocked (backward)
+	//	c3->e1 and d2 is blocked (lower right)
+	public void testPlayer1QueenBlockedMoves() {
 		ChessPlayer player1 = new ChessPlayer("John", 1);
 		ChessPlayer player2 = new ChessPlayer("John", 2);
 		cms.initializeChessPieces(player1, player2);
+		boolean moveResult;
 		
 		ChessPiece queenAte1 = cms.getChessPiece("e1");
-		boolean moveResult = queenAte1.isValidMove("c3");
-		assertEquals(moveResult, false);
+		moveResult = queenAte1.isValidMove("c3");
+		assertEquals(moveResult, false);	//	e1->c3 and d2 is blocked (top left)
+		
+		queenAte1.updatePosition("e1");
+		moveResult = queenAte1.isValidMove("e3");
+		assertEquals(moveResult, false);	//	e1->e3 and e2 is blocked (forward)
+		
+		queenAte1.updatePosition("e1");
+		moveResult = queenAte1.isValidMove("g3");
+		assertEquals(moveResult, false);	//	e1->g3 and f2 is blocked (top right)
+		
+		queenAte1.updatePosition("e1");
+		ChessPiece bisdopAtc1 = cms.getChessPiece("c1");
+		bisdopAtc1.updatePosition("a4");
+		moveResult = queenAte1.isValidMove("c1");
+		assertEquals(moveResult, false);	//	e1->c1 and d1 is blocked (left)
+		
+		queenAte1.updatePosition("e1");
+		ChessPiece bisdopAtg1 = cms.getChessPiece("g1");
+		bisdopAtg1.updatePosition("a4");
+		moveResult = queenAte1.isValidMove("g1");
+		assertEquals(moveResult, false);	//	e1->g1 and f1 is blocked (right)
+		
+		queenAte1.updatePosition("g3");
+		moveResult = queenAte1.isValidMove("e1");
+		assertEquals(moveResult, false);	//	g3->e1 and f2 is blocked (lower left)
+		
+		queenAte1.updatePosition("e3");
+		moveResult = queenAte1.isValidMove("e1");
+		assertEquals(moveResult, false);	//	e3->e1 and e2 is blocked (backward)
+		
+		queenAte1.updatePosition("c3");
+		moveResult = queenAte1.isValidMove("e1");
+		assertEquals(moveResult, false);	//	c3->e1 and d2 is blocked (lower right)
 	}
 	
 	@Test
@@ -206,6 +248,13 @@ public class TestQueen extends TestCase{
 		ChessPiece queenAte1 = cms.getChessPiece("e1");
 		boolean moveResult = queenAte1.isValidMove("d6");
 		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	public void testQueenGetScore() {
+		Queen queen = new Queen(new ChessPlayer("John", 1), null);
+		int score = queen.getScore();
+		assertEquals(score, 90);
 	}
 	
 	@Test

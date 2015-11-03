@@ -14,6 +14,7 @@ import chessGame.ChessMonitoringSystem;
 import chessGame.ChessPiece;
 import chessGame.ChessPlayer;
 import chessGame.Pawn;
+import chessGame.Queen;
 import chessGame.Rook;
 import junit.framework.TestCase;
 
@@ -150,6 +151,13 @@ public class TestRook extends TestCase{
 		ChessPiece rookAta1 = cms.getChessPiece("a1");
 		boolean moveResult = rookAta1.isValidMove("b6");
 		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	public void testRookGetScore() {
+		Rook rook = new Rook(new ChessPlayer("John", 1), null);
+		int score = rook.getScore();
+		assertEquals(score, 40);
 	}
 	
 	@Test

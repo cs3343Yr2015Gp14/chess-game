@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import chessGame.Bishop;
 import chessGame.ChessMonitoringSystem;
 import chessGame.ChessPiece;
 import chessGame.ChessPlayer;
@@ -104,6 +105,13 @@ public class TestKnight extends TestCase{
 		ChessPiece knightAtb1 = cms.getChessPiece("b1");
 		boolean moveResult = knightAtb1.isValidMove("b3");
 		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	public void testKnightGetScore() {
+		Knight knight = new Knight(new ChessPlayer("John", 1), null);
+		int score = knight.getScore();
+		assertEquals(score, 20);
 	}
 	
 	@Test

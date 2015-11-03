@@ -15,6 +15,7 @@ import chessGame.ChessMonitoringSystem;
 import chessGame.ChessPiece;
 import chessGame.ChessPlayer;
 import chessGame.Pawn;
+import chessGame.Rook;
 import junit.framework.TestCase;
 
 public class TestPawn extends TestCase{
@@ -139,6 +140,13 @@ public class TestPawn extends TestCase{
 		ChessPiece pawnAta2 = cms.getChessPiece("a2");
 		boolean moveResult = pawnAta2.isValidMove("a3");
 		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	public void testPawnGetScore() {
+		Pawn pawn = new Pawn(new ChessPlayer("John", 1), null);
+		int score = pawn.getScore();
+		assertEquals(score, 10);
 	}
 	
 	@Test

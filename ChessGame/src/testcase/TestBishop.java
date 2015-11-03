@@ -126,6 +126,13 @@ public class TestBishop extends TestCase{
 	}
 	
 	@Test
+	public void testBishopGetScore() {
+		Bishop bishop = new Bishop(new ChessPlayer("John", 1), null);
+		int score = bishop.getScore();
+		assertEquals(score, 30);
+	}
+	
+	@Test
 	public void testPlayer1PrintBishop() {
 		Bishop bishop = new Bishop(new ChessPlayer("John", 1), null);
 		String stringResult = bishop.toString();

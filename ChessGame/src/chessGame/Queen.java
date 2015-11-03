@@ -137,7 +137,7 @@ public class Queen extends ChessPiece {
 				if(position.charAt(0)-moveTo.charAt(0)<0 &&
 						position.charAt(1)-moveTo.charAt(1)>0)	
 				{
-					numOfMoves=(moveTo.charAt(1)-position.charAt(1));
+					numOfMoves=(position.charAt(1)-moveTo.charAt(1));
 					//check any pieces in the middle (position to moveTo)
 					for(int i=1;i<numOfMoves;i++)
 					{
