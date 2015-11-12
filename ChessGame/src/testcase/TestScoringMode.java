@@ -25,6 +25,7 @@ import junit.framework.TestCase;
 
 public class TestScoringMode extends TestCase{
 	private ChessMonitoringSystem chessMonitoringSystem = ChessMonitoringSystem.getInstance();
+	private GameMode mode = new ScoringMode();
 	
     /**
      * Sets up the test fixture.
@@ -48,5 +49,33 @@ public class TestScoringMode extends TestCase{
 		mode.addScore(player, scoreRelated);
 		assertEquals(10,player.getPlayerScore());	
 	}	
+	
+	//test print Result
+	public void testPrintResultPlayer1Win() {
+		ChessPlayer p1=new ChessPlayer("a", 0);
+		ChessPlayer p2=new ChessPlayer("b", 1);
+		int[] scoreRelated={100, 0};
+		mode.addScore(p1, scoreRelated);
+		String winner = mode.printResult(p1, p2);
+		assertEquals(winner,"a" + " is the winner!" + "\n" + "winner's score: 100");
+	}
+	
+	public void testPrintResultPlayer2Win() {
+		ChessPlayer p1=new ChessPlayer("a", 0);
+		ChessPlayer p2=new ChessPlayer("b", 1);
+		int[] scoreRelated={100, 0};
+		mode.addScore(p2, scoreRelated);
+		String winner = mode.printResult(p1, p2);
+		assertEquals(winner,"b"+ " is the winner!" + "\n" + "winner's score: 100");
+	}
+	
+	public void testPrintResultDraw() {
+		ChessPlayer p1=new ChessPlayer("a", 0);
+		ChessPlayer p2=new ChessPlayer("b", 1);
+		String winner = mode.printResult(p1, p2);
+		assertEquals(winner,"Draw!");
+	}
+	
+	//test isEndGame
 
 }
