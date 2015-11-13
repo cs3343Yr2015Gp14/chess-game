@@ -13,7 +13,7 @@ import chessGame.ScoringMode;
 public class TestRankScoringMode {
 	
 	private ChessMonitoringSystem chessMonitoringSystem = ChessMonitoringSystem.getInstance();
-	private GameMode mode = new ScoringMode();
+	private GameMode mode = new RankScoringMode();
 	
 	@Test
 	public void testAddLittleScore() {
@@ -21,25 +21,25 @@ public class TestRankScoringMode {
 		int[] scoreRelated={100, 0};
 		mode.addScore(p1, scoreRelated);
 		int result = p1.getPlayerScore();
-		assertEquals(result,8);
+		assertEquals(result,80);
 	}	
 	
 	@Test
 	public void testAddSameScore() {
 		ChessPlayer p1=new ChessPlayer("a", 0);
-		int[] scoreRelated={100, 0};
+		int[] scoreRelated={100, 2};
 		mode.addScore(p1, scoreRelated);
 		int result = p1.getPlayerScore();
-		assertEquals(result,8);
+		assertEquals(100, result);
 	}	
 	
 	@Test
 	public void testAddHigherScore() {
 		ChessPlayer p1=new ChessPlayer("a", 0);
-		int[] scoreRelated={100, 0};
+		int[] scoreRelated={100, 1};
 		mode.addScore(p1, scoreRelated);
 		int result = p1.getPlayerScore();
-		assertEquals(result,8);
+		assertEquals(120, result);
 	}	
 	
 	//test print Result
@@ -50,7 +50,7 @@ public class TestRankScoringMode {
 		int[] scoreRelated={100, 0};
 		mode.addScore(p1, scoreRelated);
 		String winner = mode.printResult(p1, p2);
-		assertEquals(winner,"a"+ " is the winner!" + "\n" + "winner's score: 100");
+		assertEquals(winner,"a"+ " is the winner!" + "\n" + "winner's score: 80");
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class TestRankScoringMode {
 		int[] scoreRelated={100, 0};
 		mode.addScore(p2, scoreRelated);
 		String winner = mode.printResult(p1, p2);
-		assertEquals(winner,"b"+ " is the winner!" + "\n" + "winner's score: 100");
+		assertEquals(winner,"b"+ " is the winner!" + "\n" + "winner's score: 80");
 	}
 	
 	@Test
