@@ -146,9 +146,7 @@ public class ChessMonitoringSystem {
 			}
 			else //capturing own chess
 		  		throw new ExOwnChessCaptured();
-			
 		}
-		
 		movingChess.updatePosition(newPos);
 		return true;
 	}
