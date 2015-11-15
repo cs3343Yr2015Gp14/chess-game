@@ -1,5 +1,5 @@
 /**
- * @author PP
+ * @author PP, Eva
  *
  */
 package testcase;
@@ -18,20 +18,6 @@ import junit.framework.TestCase;
 
 public class TestCMS extends TestCase{
 	private ChessMonitoringSystem chessMonitoringSystem = ChessMonitoringSystem.getInstance();
-	
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
-	public void setUp() {}
-
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
-	public void tearDown() {}
 	
 	@Test
 	public void testInitializeAndGetChessPiece() {
@@ -85,4 +71,106 @@ public class TestCMS extends TestCase{
 			assertEquals(""+(char)(82+j),chess8.toString()); //rook
 		}
 	}
+	
+	@Test
+	public void testremoveChessPiece() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.removeChessPiece("a1");
+		ChessPiece result = chessMonitoringSystem.getChessPiece("a1");
+		assertEquals(result,null);
+	}
+	
+	//test IsKingCaptured()
+	@Test
+	public void testIsKingCapturedZeroLoop() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		for (int i=1;i<9;i++){
+			for(int j=1;j<3;j++){
+				String position = Character.toString((char)(96+i)) + j;
+				//removeChessPiece have been tested in the beginning.
+				chessMonitoringSystem.removeChessPiece(position);
+			}
+			for(int j=7;j<9;j++){
+				String position = Character.toString((char)(96+i)) + j;
+				chessMonitoringSystem.removeChessPiece(position);
+			}
+		}
+		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
+		assertEquals(result,null);
+	}
+	
+	public void testIsKingCapturedOneLoopNotKing() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		for (int i=1;i<9;i++){
+			for(int j=1;j<3;j++){
+				String position = Character.toString((char)(96+i)) + j;
+				//removeChessPiece have been tested in the beginning.
+				chessMonitoringSystem.removeChessPiece(position);
+			}
+			for(int j=7;j<9;j++){
+				if (j!=7&&i!=1){
+					String position = Character.toString((char)(96+i)) + j;
+					chessMonitoringSystem.removeChessPiece(position);
+				}
+			}
+		}
+		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
+		assertEquals(result,null);
+	}
+	
+	public void testIsKingCapturedOneLoopIsKing() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		for (int i=1;i<9;i++){
+			for(int j=1;j<3;j++){
+				String position = Character.toString((char)(96+i)) + j;
+				//removeChessPiece have been tested in the beginning.
+				chessMonitoringSystem.removeChessPiece(position);
+			}
+			for(int j=7;j<9;j++){
+				if (j!=8&&i!=4){
+					String position = Character.toString((char)(96+i)) + j;
+					chessMonitoringSystem.removeChessPiece(position);
+				}
+			}
+		}
+		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
+		assertEquals(result,p2);
+	}
+	
+	public void testIsKingCapturedMoreThanOneLoop() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
+		assertEquals(result,null);
+	}
+	
+	public void testIsKingCapturedMoreThanOneLoopNoKing() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.removeChessPiece("d8");
+		chessMonitoringSystem.removeChessPiece("d1");
+		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
+		assertEquals(result,null);
+	}
+	
+	public void testIsKingCapturedMoreThanOneLoopOneKing() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.removeChessPiece("d8");
+		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
+		assertEquals(result,p1);
+	}
+	
+	
 }
