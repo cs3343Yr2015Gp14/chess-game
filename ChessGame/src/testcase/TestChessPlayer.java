@@ -43,7 +43,29 @@ public class TestChessPlayer extends TestCase{
 		ChessPlayer player=new ChessPlayer("John", 1);
 		player.addScore(10);
 		assertEquals(10,player.getPlayerScore());
-	
 	}	
-
+	
+	//test getPlayerScore
+	@Test
+	public void testgetPlayerScore() {
+		ChessPlayer player=new ChessPlayer("John", 1);
+		int result = player.getPlayerScore();
+		assertEquals(0,result);
+	}
+	
+	//test getPlayerId
+	@Test
+	public void testgetPlayerId() {
+		ChessPlayer player=new ChessPlayer("John", 1);
+		int result = player.getPlayerId();
+		assertEquals(1,result);
+	}
+	
+	//test lossPiece
+	public void testlossPiece() {
+		ChessPlayer player=new ChessPlayer("John", 1);
+		int result = player.getPlayerId();
+		assertEquals(1,result);
+	}
+	
 }

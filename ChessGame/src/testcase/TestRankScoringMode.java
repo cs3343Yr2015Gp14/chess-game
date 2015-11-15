@@ -70,5 +70,24 @@ public class TestRankScoringMode {
 		String winner = mode.printResult(p1, p2);
 		assertEquals(winner,"Draw!");
 	}
-
+	
+	//test isEndGame
+	@Test
+	public void testisEndGameKingCaptured() {
+		ChessPlayer p1=new ChessPlayer("a", 0);
+		ChessPlayer p2=new ChessPlayer("b", 1);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.removeChessPiece("d8");
+		boolean result = mode.isEndGame();
+		assertEquals(true, result);
+	}
+	
+	@Test
+	public void testisEndGameNoKingCaptured() {
+		ChessPlayer p1=new ChessPlayer("a", 0);
+		ChessPlayer p2=new ChessPlayer("b", 1);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		boolean result = mode.isEndGame();
+		assertEquals(false, result);
+	}
 }
