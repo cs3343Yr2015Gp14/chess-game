@@ -6,6 +6,8 @@ package testcase;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -13,11 +15,25 @@ import org.junit.Test;
 import chessGame.ChessMonitoringSystem;
 import chessGame.ChessPiece;
 import chessGame.ChessPlayer;
+import chessGame.ClassicMode;
+import chessGame.GameMode;
+import chessGame.RankScoringMode;
+import chessGame.ScoringMode;
 import chessGame.Bishop;
 import junit.framework.TestCase;
 
 public class TestCMS extends TestCase{
 	private ChessMonitoringSystem chessMonitoringSystem = ChessMonitoringSystem.getInstance();
+	private GameMode mode;
+	
+	private ByteArrayOutputStream baos;
+	private PrintStream ps;
+	private void initialise(){
+        baos = new ByteArrayOutputStream();
+        ps = new PrintStream(baos);
+        System.setOut(ps);
+        //assertTrue(baos.toString().equals("Main"));
+    }
 	
 	@Test
 	public void testInitializeAndGetChessPiece() {
@@ -79,7 +95,7 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.removeChessPiece("a1");
 		ChessPiece result = chessMonitoringSystem.getChessPiece("a1");
-		assertEquals(result,null);
+		assertEquals(null, result);
 	}
 	
 	//test IsKingCaptured()
@@ -100,7 +116,7 @@ public class TestCMS extends TestCase{
 			}
 		}
 		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
-		assertEquals(result,null);
+		assertEquals(null, result);
 	}
 	
 	public void testIsKingCapturedOneLoopNotKing() {
@@ -121,7 +137,7 @@ public class TestCMS extends TestCase{
 			}
 		}
 		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
-		assertEquals(result,null);
+		assertEquals(null, result);
 	}
 	
 	public void testIsKingCapturedOneLoopIsKing() {
@@ -142,7 +158,7 @@ public class TestCMS extends TestCase{
 			}
 		}
 		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
-		assertEquals(result,p2);
+		assertEquals(p2, result);
 	}
 	
 	public void testIsKingCapturedMoreThanOneLoop() {
@@ -150,7 +166,7 @@ public class TestCMS extends TestCase{
 		ChessPlayer p2 = new ChessPlayer("b", 0);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
-		assertEquals(result,null);
+		assertEquals(null, result);
 	}
 	
 	public void testIsKingCapturedMoreThanOneLoopNoKing() {
@@ -160,7 +176,7 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.removeChessPiece("d8");
 		chessMonitoringSystem.removeChessPiece("d1");
 		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
-		assertEquals(result,null);
+		assertEquals(null, result);
 	}
 	
 	public void testIsKingCapturedMoreThanOneLoopOneKing() {
@@ -169,8 +185,180 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.removeChessPiece("d8");
 		ChessPlayer result = chessMonitoringSystem.isKingCaptured();
-		assertEquals(result,p1);
+		assertEquals(p1, result);
 	}
 	
+	//test showAllChessPiecesPosition
+	/*public void testshowAllChessPiecesPositionNoChesses() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		for (int i=1;i<9;i++){
+			for(int j=1;j<9;j++){
+				if (j==3)
+					j=7;
+				String position = Character.toString((char)(96+i)) + j;
+				chessMonitoringSystem.removeChessPiece(position);
+			}
+		}
+		chessMonitoringSystem.showAllChessPiecesPosition();
+		String chessboard="  a b c d e f g h" + "\n" + "8 0 0 0 0 0 0 0 0 8" + "\n" + "7 0 0 0 0 0 0 0 0 7" + "\n" + "6 0 0 0 0 0 0 0 0 0 6" + "\n" + "5 0 0 0 0 0 0 0 0 5" + "\n" + "4 0 0 0 0 0 0 0 0 4" + "\n" + "3 0 0 0 0 0 0 0 0 3" + "\n" + "2 0 0 0 0 0 0 0 0 2"+ "\n" + "1 0 0 0 0 0 0 0 0 1" + "\n" + "  a b c d e f g h";
+		assertTrue(baos.toString().equals(chessboard));
+	}*/
+	
+	//test start game
+	public void teststartGameClassic(){
+		initialise();
+		chessMonitoringSystem.startGame(1);
+		assertTrue(baos.toString().equals("This is Classic Mode.\n"));
+	}
+	
+	public void teststartGameScoring(){
+		initialise();
+		chessMonitoringSystem.startGame(2);
+		assertTrue(baos.toString().equals("This is Scoring Mode.\n"));
+	}
+	
+	public void teststartGameScoringPlus(){
+		initialise();
+		chessMonitoringSystem.startGame(3);
+		assertTrue(baos.toString().equals("This is Scoring+ Mode.\n"));
+	}
+	
+	//test endGame integration test (GameMode.isEndGame + CMS)
+	public void testEndGameNotEndGame() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(1);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		boolean result = chessMonitoringSystem.endGame();
+		assertEquals(false, result);
+	}
+	
+	public void testEndGameEndGame() {
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.startGame(1);
+		chessMonitoringSystem.removeChessPiece("d8");
+		boolean result = chessMonitoringSystem.endGame();
+		assertEquals(true, result);
+	}
+	
+	//test getResult integration test (GameMode.printResult + CMS)
+	@Test
+	public void testgetResultP1WinClassic() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(1);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.removeChessPiece("d8");
+		chessMonitoringSystem.endGame();
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Classic Mode.\n" + "a is the winner!\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultP2WinClassic() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(1);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.removeChessPiece("d1");
+		chessMonitoringSystem.endGame();
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Classic Mode.\n" + "b is the winner!\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultP1WinScoring() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		int[] scoreRelated={100, 0};
+		mode = new ScoringMode();
+		mode.addScore(p1, scoreRelated);
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Scoring Mode.\n" + "a" + " is the winner!" + "\n" + "winner's score: 100\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultP2WinScoring() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		int[] scoreRelated={100, 0};
+		mode = new ScoringMode();
+		mode.addScore(p2, scoreRelated);
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Scoring Mode.\n" + "b" + " is the winner!" + "\n" + "winner's score: 100\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultDrawScoring() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Scoring Mode.\n" + "Draw!\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultP1WinScoringPlus() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(3);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		mode = new RankScoringMode();
+		int[] scoreRelated={100, 0};
+		mode.addScore(p1, scoreRelated);
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Scoring+ Mode.\n" + "a"+ " is the winner!" + "\n" + "winner's score: 80\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultP2WinScoringPlus() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(3);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		mode = new RankScoringMode();
+		int[] scoreRelated={100, 0};
+		mode.addScore(p2, scoreRelated);
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Scoring+ Mode.\n" + "b"+ " is the winner!" + "\n" + "winner's score: 80\n", baos.toString());
+	}
+	
+	@Test
+	public void testgetResultDrawScoringPlus() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.startGame(3);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.getResult(p1, p2);
+		assertEquals("This is Scoring+ Mode.\n" + "Draw!\n", baos.toString());
+	}
+	
+	//test moveChessPiece
+	@Test
+	public void testVaildMoveChessPieceNotRemove(){
+		ChessPlayer p1 = new ChessPlayer("a", 0);
+		ChessPlayer p2 = new ChessPlayer("b", 0);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a2", "a4");
+		assertEquals(true, result);
+	}
 	
 }

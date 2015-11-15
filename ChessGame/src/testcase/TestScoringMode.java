@@ -58,7 +58,7 @@ public class TestScoringMode extends TestCase{
 		int[] scoreRelated={100, 0};
 		mode.addScore(p1, scoreRelated);
 		String winner = mode.printResult(p1, p2);
-		assertEquals(winner,"a" + " is the winner!" + "\n" + "winner's score: 100");
+		assertEquals("a" + " is the winner!" + "\n" + "winner's score: 100", winner);
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ public class TestScoringMode extends TestCase{
 		int[] scoreRelated={100, 0};
 		mode.addScore(p2, scoreRelated);
 		String winner = mode.printResult(p1, p2);
-		assertEquals(winner,"b"+ " is the winner!" + "\n" + "winner's score: 100");
+		assertEquals("b"+ " is the winner!" + "\n" + "winner's score: 100", winner);
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class TestScoringMode extends TestCase{
 		ChessPlayer p1=new ChessPlayer("a", 0);
 		ChessPlayer p2=new ChessPlayer("b", 1);
 		String winner = mode.printResult(p1, p2);
-		assertEquals(winner,"Draw!");
+		assertEquals("Draw!", winner);
 	}
 	
 	//test isEndGame

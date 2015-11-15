@@ -68,4 +68,27 @@ public class TestChessPiece extends TestCase{
 		}
 	}
 */
+	
+	@Test
+	public void testgetPlayer() {
+		ChessPlayer p1=new ChessPlayer("a", 1);
+		ChessPiece c = new  Pawn(p1, "a1");
+		ChessPlayer result = c.getPlayer();
+		assertEquals(p1, result);
+	}
+	
+	@Test
+	public void testgetPosition() {
+		ChessPlayer p1=new ChessPlayer("a", 1);
+		ChessPiece c = new  Pawn(p1, "a1");
+		assertEquals("a1", c.getPosition());
+	}
+	
+	@Test
+	public void testUpdatePosition(){
+		ChessPlayer p1=new ChessPlayer("a", 1);
+		ChessPiece c = new  Pawn(p1, "a1");
+		c.updatePosition("a2");
+		assertEquals("a2", c.getPosition());
+	}
 }

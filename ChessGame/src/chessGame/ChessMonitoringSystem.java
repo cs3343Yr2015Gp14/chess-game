@@ -96,20 +96,25 @@ public class ChessMonitoringSystem {
 
 	public boolean moveChessPiece(ChessPlayer player,String oldPos,String newPos) {
 		ChessPiece movingChess = getChessPiece(oldPos);
-		/*ERROR-CATCHING : IMPLEMENTED
-		 * NOTE:EXCEPTIONS SUCH AS ExOwnChessCaptured ARE NOT BEING USED
-		 * MAY REMOVE AS RESULT OF REFACTOR
-		 * OR TO BE USED BY CLASSES OF CHESSPIECE
-		 */
 		
 		try {
 			if (movingChess != null) {
 				if (movingChess.getPlayer()==player) {
 					if(movingChess.isValidMove(newPos)) {
-						boolean move = move(player, newPos, movingChess);
-						return move;
+						if(getChessPiece(newPos)!=null) {
+							if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
+							{
+								int rank = compareScore(movingChess, getChessPiece(newPos));
+								int[] score={getChessPiece(newPos).getScore(), rank};
+								mode.addScore(player, score);
+								removeChessPiece(newPos);
+							}
+							else //capturing own chess
+						  		throw new ExOwnChessCaptured();
+						}
+						movingChess.updatePosition(newPos);
+						return true;
 					}
-						
 					else
 						throw new ExInvalidMove();
 				}
@@ -133,22 +138,6 @@ public class ChessMonitoringSystem {
 			return false;
 		}
 
-	}
-
-	private boolean move(ChessPlayer player, String newPos, ChessPiece movingChess) throws ExNullMovingChess, ExOwnChessCaptured {
-		if(getChessPiece(newPos)!=null) {
-			if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
-			{
-				int rank = compareScore(movingChess, getChessPiece(newPos));
-				int[] score={getChessPiece(newPos).getScore(), rank};
-				mode.addScore(player, score);
-				removeChessPiece(newPos);
-			}
-			else //capturing own chess
-		  		throw new ExOwnChessCaptured();
-		}
-		movingChess.updatePosition(newPos);
-		return true;
 	}
 
 	private int compareScore(ChessPiece move, ChessPiece old){
@@ -182,20 +171,21 @@ public class ChessMonitoringSystem {
 	}
 
 	public void getResult(ChessPlayer player1, ChessPlayer player2) {
-		//player.getPlayerScore()
-		//player.getPlayerName()
 		System.out.println(mode.printResult(player1, player2));
 	}
 
 	public void startGame(int mode) {
 		if (mode == 1){
         	this.mode = new ClassicMode();
+        	System.out.print("This is Classic Mode.\n");
         }
         else if (mode == 2){
         	this.mode = new ScoringMode();
+        	System.out.print("This is Scoring Mode.\n");
         }
         else if (mode ==3 ){
         	this.mode = new RankScoringMode();
+        	System.out.print("This is Scoring+ Mode.\n");
         }
 	}
 
