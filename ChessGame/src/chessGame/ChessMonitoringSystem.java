@@ -146,9 +146,7 @@ public class ChessMonitoringSystem {
 			}
 			else //capturing own chess
 		  		throw new ExOwnChessCaptured();
-			
 		}
-		
 		movingChess.updatePosition(newPos);
 		return true;
 	}
@@ -173,7 +171,7 @@ public class ChessMonitoringSystem {
 		return null;
 	}
 	
-	private void removeChessPiece(String position) {
+	public void removeChessPiece(String position) {
 		ChessPiece target = getChessPiece(position);
 		//target.updatePosition(null);	
 		allChessPieces.remove(target);
