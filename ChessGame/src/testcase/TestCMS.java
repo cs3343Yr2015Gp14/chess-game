@@ -17,7 +17,10 @@ import chessGame.ChessPiece;
 import chessGame.ChessPlayer;
 import chessGame.ClassicMode;
 import chessGame.GameMode;
+import chessGame.Pawn;
+import chessGame.Queen;
 import chessGame.RankScoringMode;
+import chessGame.Rook;
 import chessGame.ScoringMode;
 import chessGame.Bishop;
 import junit.framework.TestCase;
@@ -88,6 +91,8 @@ public class TestCMS extends TestCase{
 		}
 	}
 	
+	
+	//test removeChessPiece
 	@Test
 	public void testremoveChessPiece() {
 		ChessPlayer p1 = new ChessPlayer("a", 0);
@@ -105,13 +110,11 @@ public class TestCMS extends TestCase{
 		ChessPlayer p2 = new ChessPlayer("b", 0);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		for (int i=1;i<9;i++){
-			for(int j=1;j<3;j++){
+			for(int j=1;j<9;j++){
+				if (j==3)
+					j=7;
 				String position = Character.toString((char)(96+i)) + j;
 				//removeChessPiece have been tested in the beginning.
-				chessMonitoringSystem.removeChessPiece(position);
-			}
-			for(int j=7;j<9;j++){
-				String position = Character.toString((char)(96+i)) + j;
 				chessMonitoringSystem.removeChessPiece(position);
 			}
 		}
@@ -189,10 +192,11 @@ public class TestCMS extends TestCase{
 	}
 	
 	//test showAllChessPiecesPosition
-	/*public void testshowAllChessPiecesPositionNoChesses() {
+	@Test
+	public void testshowAllChessPiecesPositionNoChesses() {
 		initialise();
-		ChessPlayer p1 = new ChessPlayer("a", 0);
-		ChessPlayer p2 = new ChessPlayer("b", 0);
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		for (int i=1;i<9;i++){
 			for(int j=1;j<9;j++){
@@ -203,9 +207,41 @@ public class TestCMS extends TestCase{
 			}
 		}
 		chessMonitoringSystem.showAllChessPiecesPosition();
-		String chessboard="  a b c d e f g h" + "\n" + "8 0 0 0 0 0 0 0 0 8" + "\n" + "7 0 0 0 0 0 0 0 0 7" + "\n" + "6 0 0 0 0 0 0 0 0 0 6" + "\n" + "5 0 0 0 0 0 0 0 0 5" + "\n" + "4 0 0 0 0 0 0 0 0 4" + "\n" + "3 0 0 0 0 0 0 0 0 3" + "\n" + "2 0 0 0 0 0 0 0 0 2"+ "\n" + "1 0 0 0 0 0 0 0 0 1" + "\n" + "  a b c d e f g h";
-		assertTrue(baos.toString().equals(chessboard));
-	}*/
+		String chessboard="  a b c d e f g h" + "\n" + "8 O O O O O O O O 8" + "\n" + "7 O O O O O O O O 7" + "\n" + "6 O O O O O O O O 6" + "\n" + "5 O O O O O O O O 5" + "\n" + "4 O O O O O O O O 4" + "\n" + "3 O O O O O O O O 3" + "\n" + "2 O O O O O O O O 2"+ "\n" + "1 O O O O O O O O 1" + "\n" + "  a b c d e f g h\n";
+		assertEquals(chessboard, baos.toString());
+	}
+	
+	public void testshowAllChessPiecesPositionHaveChesses() {
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.showAllChessPiecesPosition();
+		String chessboard="  a b c d e f g h" + "\n" + "8 r n b k q b n r 8" + "\n" + "7 p p p p p p p p 7" + "\n" + "6 O O O O O O O O 6" + "\n" + "5 O O O O O O O O 5" + "\n" + "4 O O O O O O O O 4" + "\n" + "3 O O O O O O O O 3" + "\n" + "2 P P P P P P P P 2"+ "\n" + "1 R N B K Q B N R 1" + "\n" + "  a b c d e f g h\n";
+		assertEquals(chessboard, baos.toString());
+	}
+	
+	//test compareScore
+	public void testcompareScore0(){
+		ChessPiece queen = new Queen(null, "a1");
+		ChessPiece rook = new Rook (null, "a2");
+		int result = chessMonitoringSystem.compareScore(queen, rook);
+		assertEquals(0, result);
+	}
+	
+	public void testcompareScore1(){
+		ChessPiece queen = new Queen(null, "a1");
+		ChessPiece rook = new Rook (null, "a2");
+		int result = chessMonitoringSystem.compareScore(rook, queen);
+		assertEquals(1, result);
+	}
+	
+	public void testcompareScore2(){
+		ChessPiece q1 = new Queen(null, "a1");
+		ChessPiece q2 = new Queen (null, "a2");
+		int result = chessMonitoringSystem.compareScore(q1, q2);
+		assertEquals(2, result);
+	}
 	
 	//test start game
 	public void teststartGameClassic(){
@@ -343,8 +379,8 @@ public class TestCMS extends TestCase{
 	@Test
 	public void testgetResultDrawScoringPlus() {
 		initialise();
-		ChessPlayer p1 = new ChessPlayer("a", 0);
-		ChessPlayer p2 = new ChessPlayer("b", 0);
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.startGame(3);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.getResult(p1, p2);
@@ -352,13 +388,205 @@ public class TestCMS extends TestCase{
 	}
 	
 	//test moveChessPiece
+	//test Update Success
 	@Test
 	public void testVaildMoveChessPieceNotRemove(){
-		ChessPlayer p1 = new ChessPlayer("a", 0);
-		ChessPlayer p2 = new ChessPlayer("b", 0);
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
-		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a2", "a4");
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a2", "a3");
 		assertEquals(true, result);
 	}
 	
+	//test UpdateSuccessAndRemove
+	@Test
+	public void testVaildMoveChessPieceRemove(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Pawn = chessMonitoringSystem.getChessPiece("a7");
+		p2Pawn.updatePosition("b3");
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		assertEquals(true, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceAddScoreClassic(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.startGame(1);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Pawn = chessMonitoringSystem.getChessPiece("a7");
+		p2Pawn.updatePosition("b3");
+		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		int result = p1.getPlayerScore();
+		assertEquals(0, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceAddScoreScoring(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.startGame(2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Pawn = chessMonitoringSystem.getChessPiece("a7");
+		p2Pawn.updatePosition("b3");
+		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		int result = p1.getPlayerScore();
+		assertEquals(10, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceAddScoreScoringPlusHigher(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.startGame(3);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Queen = chessMonitoringSystem.getChessPiece("e8");
+		p2Queen.updatePosition("b3");
+		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		int result = p1.getPlayerScore();
+		assertEquals(108, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceAddScoreScoringPlusSame(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.startGame(3);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Pawn = chessMonitoringSystem.getChessPiece("a7");
+		p2Pawn.updatePosition("b3");
+		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		int result = p1.getPlayerScore();
+		assertEquals(10, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceAddScoreScoringPlusLower(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.startGame(3);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Queen = chessMonitoringSystem.getChessPiece("e8");
+		p2Queen.updatePosition("e4");
+		chessMonitoringSystem.moveChessPiece(p2, "e4", "c2");
+		int result = p2.getPlayerScore();
+		assertEquals(8, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceRemoveSuccess(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p2Queen = chessMonitoringSystem.getChessPiece("e8");
+		p2Queen.updatePosition("e4");
+		chessMonitoringSystem.moveChessPiece(p2, "e4", "c2");
+		int counter = 0;
+		for (int i=1;i<9;i++){
+			for(int j=1;j<9;j++){
+				String position = Character.toString((char)(96+i)) + j;
+				ChessPiece c = chessMonitoringSystem.getChessPiece(position);
+				if (c instanceof Pawn)
+					counter++;
+			}
+		}
+		assertEquals(15, counter);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceRemoveGetOwnPiece(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p1Pawn = chessMonitoringSystem.getChessPiece("b2");
+		p1Pawn.updatePosition("b3");
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		assertEquals(false, result);
+	}
+	
+	/*
+	@Test
+	public void testVaildMoveChessPieceRemoveGetOwnPieceMessagePawn(){
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p1Pawn = chessMonitoringSystem.getChessPiece("b2");
+		p1Pawn.updatePosition("b3");
+		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		assertEquals("[You cannot capture your own chessPiece!]", baos.toString());
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceRemoveGetOwnPieceMessageOther(){
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		ChessPiece p1Rook1 = chessMonitoringSystem.getChessPiece("a1");
+		ChessPiece p1Rook2 = chessMonitoringSystem.getChessPiece("h1");
+		p1Rook1.updatePosition("a3");
+		p1Rook2.updatePosition("c3");
+		chessMonitoringSystem.moveChessPiece(p1, "a3", "c3");
+		assertEquals("[You cannot capture your own chessPiece!]", baos.toString());
+	}*/
+	
+	@Test
+	public void testVaildMoveChessPieceNotValidMove(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		assertEquals(false, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceNotValidMoveMessage(){
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
+		assertEquals("[The move is invalid.]\n", baos.toString());
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceNotPlayerChess(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a7", "a6");
+		assertEquals(false, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceNotPlayerChessMessage(){
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.moveChessPiece(p1, "a7", "a6");
+		assertEquals("[Selected piece does not belong to you!]\n", baos.toString());
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceNullChess(){
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		boolean result = chessMonitoringSystem.moveChessPiece(p1, "a3", "a4");
+		assertEquals(false, result);
+	}
+	
+	@Test
+	public void testVaildMoveChessPieceNullChessMessage(){
+		initialise();
+		ChessPlayer p1 = new ChessPlayer("a", 1);
+		ChessPlayer p2 = new ChessPlayer("b", 2);
+		chessMonitoringSystem.initializeChessPieces(p1,p2);
+		chessMonitoringSystem.moveChessPiece(p1, "a3", "a4");
+		assertEquals("[Chesspiece not found!]\n", baos.toString());
+	}
 }

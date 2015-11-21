@@ -140,7 +140,7 @@ public class ChessMonitoringSystem {
 
 	}
 
-	private int compareScore(ChessPiece move, ChessPiece old){
+	public int compareScore(ChessPiece move, ChessPiece old){
 		if (move.getScore() > old.getScore())
 			return 0;
 		else if (old.getScore() > move.getScore())
@@ -183,7 +183,7 @@ public class ChessMonitoringSystem {
         	this.mode = new ScoringMode();
         	System.out.print("This is Scoring Mode.\n");
         }
-        else if (mode ==3 ){
+        else {
         	this.mode = new RankScoringMode();
         	System.out.print("This is Scoring+ Mode.\n");
         }
