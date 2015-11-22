@@ -17,14 +17,17 @@ import chessGame.Bishop;
 import junit.framework.TestCase;
 
 public class TestBishop extends TestCase{
-	private ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
+	ChessMonitoringSystem cms = ChessMonitoringSystem.getInstance();
+	ChessPlayer player1 = new ChessPlayer("John", 1);
+	ChessPlayer player2 = new ChessPlayer("John", 2);
+	
 	
     /**
      * Sets up the test fixture.
      *
      * Called before every test case method.
      */
-	public void setUp() {}
+	public void setUp() {cms.initializeChessPieces(player1, player2);}
 
     /**
      * Tears down the test fixture.
@@ -36,10 +39,6 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop move to current position, bishop c1->c1
 	public void testPlayer1BishopMoveToCurrentPos() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
 		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		boolean moveResult = bishopAtc1.isValidMove("c1");
 		assertEquals(moveResult, false);
@@ -48,10 +47,6 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop's top left move, bishop c3->a5
 	public void testPlayer1BishopTopLeftMove() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
 		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		bishopAtc1.updatePosition("c3");
 		
@@ -62,10 +57,6 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop's top right move, bishop c3->e5
 	public void testPlayer1BishopTopRightMove() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
 		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		bishopAtc1.updatePosition("c3");
 		
@@ -76,10 +67,6 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop's bottom left move, bishop e5->c3
 	public void testPlayer1BishopBottomLeftMove() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
 		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		bishopAtc1.updatePosition("e5");
 		
@@ -90,10 +77,6 @@ public class TestBishop extends TestCase{
 	@Test
 	//Test case: test for Player 1 bishop's bottom right move, bishop a5->c3
 	public void testPlayer1BishopBottomRightMove() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
 		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		bishopAtc1.updatePosition("a5");
 		
@@ -102,25 +85,44 @@ public class TestBishop extends TestCase{
 	}
 	
 	@Test
-	//Test case: test for Player 1 bishop's blocked move, c1->a3 and b2 blocked
-	public void testPlayer1BishopBlockedMove() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
-		Bishop bishopAtc1 = new Bishop(player1, "c1");
+	//Test case: test for Player 1 bishop's blocked move, c1->a3 and b2 blocked (top left)
+	public void testPlayer1BishopTopLeftBlockedMove() {
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		boolean moveResult = bishopAtc1.isValidMove("a3");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 bishop's blocked move, e3->c1 and d2 blocked (lower left)
+	public void testPlayer1BishopLowerLeftBlockedMove() {
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
+		bishopAtc1.updatePosition("e3");
+//		System.out.println("bishopAtc1.getPosition(): "+bishopAtc1.getPosition());
+		boolean moveResult = bishopAtc1.isValidMove("c1");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 bishop's blocked move, c1->e3 and d2 blocked (top right)
+	public void testPlayer1BishoTopRightBlockedMove() {
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
+		boolean moveResult = bishopAtc1.isValidMove("e3");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
+	//Test case: test for Player 1 bishop's blocked move, a3->c1 and b2 blocked (lower right)
+	public void testPlayer1BishoLowerRightBlockedMove() {
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
+		bishopAtc1.updatePosition("a3");
+		boolean moveResult = bishopAtc1.isValidMove("c1");
 		assertEquals(moveResult, false);
 	}
 	
 	@Test
 	//Test case: test for Player 1 bishop's invalid move, c1->b6
 	public void testPlayer1BishopInvalidMove() {
-		ChessPlayer player1 = new ChessPlayer("John", 1);
-		ChessPlayer player2 = new ChessPlayer("John", 2);
-		cms.initializeChessPieces(player1, player2);
-		
-		Bishop bishopAtc1 = new Bishop(player1, "c1");
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
 		boolean moveResult = bishopAtc1.isValidMove("b6");
 		assertEquals(moveResult, false);
 	}

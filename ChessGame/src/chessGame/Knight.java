@@ -18,9 +18,9 @@ public class Knight extends ChessPiece {
 		{
 			int xPosDiff = moveTo.charAt(0)-position.charAt(0);
 			int yPosDiff = moveTo.charAt(1)-position.charAt(1);
-			if (Math.abs(xPosDiff)==2 && Math.abs(yPosDiff)==1) //vertical move
+			if (Math.abs(xPosDiff)==2 && Math.abs(yPosDiff)==1)	//horizontal move
 				return true;
-			else if (Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==2) //horizontal move
+			else if (Math.abs(xPosDiff)==1 && Math.abs(yPosDiff)==2)	//vertical move
 				return true;
 		}
 		return false;
