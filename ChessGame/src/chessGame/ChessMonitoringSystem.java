@@ -68,13 +68,13 @@ public class ChessMonitoringSystem {
 		for (ChessPiece c: allChessPieces)
 		{
 			tempPos = c.getPosition();
-			if (tempPos==null)
-				chessPiecesPosition[yPosInNum-1][xPosInNum-1]="O";
-			else
-			{
+			//if (tempPos==null)
+			//	chessPiecesPosition[yPosInNum-1][xPosInNum-1]="O";
+			//else
+			//{
 				xPosInNum = tempPos.charAt(0)-96;
 				yPosInNum = tempPos.charAt(1)-48;	
-			}
+			//}
 			chessPiecesPosition[yPosInNum-1][xPosInNum-1] = c.toString(); //a1 on chess board->[0][0] in array
 		}
 		
@@ -102,15 +102,10 @@ public class ChessMonitoringSystem {
 				if (movingChess.getPlayer()==player) {
 					if(movingChess.isValidMove(newPos)) {
 						if(getChessPiece(newPos)!=null) {
-							if (getChessPiece(newPos).getPlayer()!=player) //capturing enemy
-							{
-								int rank = compareScore(movingChess, getChessPiece(newPos));
-								int[] score={getChessPiece(newPos).getScore(), rank};
-								mode.addScore(player, score);
-								removeChessPiece(newPos);
-							}
-							else //capturing own chess
-						  		throw new ExOwnChessCaptured();
+							int rank = compareScore(movingChess, getChessPiece(newPos));
+							int[] score={getChessPiece(newPos).getScore(), rank};
+							mode.addScore(player, score);
+							removeChessPiece(newPos);
 						}
 						movingChess.updatePosition(newPos);
 						return true;
@@ -125,9 +120,6 @@ public class ChessMonitoringSystem {
 				throw new ExNullMovingChess();
 			}
 		} catch (ExNullMovingChess e) {
-			System.out.println("["+e.getMessage()+"]");
-			return false;
-		} catch (ExOwnChessCaptured e) {
 			System.out.println("["+e.getMessage()+"]");
 			return false;
 		} catch (ExEnemyChessSelected e) {
