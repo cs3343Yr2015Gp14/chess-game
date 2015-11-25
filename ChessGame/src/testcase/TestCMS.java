@@ -433,7 +433,7 @@ public class TestCMS extends TestCase{
 			}
 		}
 		chessMonitoringSystem.showAllChessPiecesPosition();
-		String chessboard="  a b c d e f g h" + "\n" + "8 O O O O O O O O 8" + "\n" + "7 O O O O O O O O 7" + "\n" + "6 O O O O O O O O 6" + "\n" + "5 O O O O O O O O 5" + "\n" + "4 O O O O O O O O 4" + "\n" + "3 O O O O O O O O 3" + "\n" + "2 O O O O O O O O 2"+ "\n" + "1 O O O O O O O O 1" + "\n" + "  a b c d e f g h\n";
+		String chessboard="  a b c d e f g h" + "\r\n" + "8 O O O O O O O O 8" + "\r\n" + "7 O O O O O O O O 7" + "\r\n" + "6 O O O O O O O O 6" + "\r\n" + "5 O O O O O O O O 5" + "\r\n" + "4 O O O O O O O O 4" + "\r\n" + "3 O O O O O O O O 3" + "\r\n" + "2 O O O O O O O O 2"+ "\r\n" + "1 O O O O O O O O 1" + "\r\n" + "  a b c d e f g h\r\n";
 		assertEquals(chessboard, baos.toString());
 	}
 	
@@ -443,7 +443,7 @@ public class TestCMS extends TestCase{
 		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.showAllChessPiecesPosition();
-		String chessboard="  a b c d e f g h" + "\n" + "8 r n b k q b n r 8" + "\n" + "7 p p p p p p p p 7" + "\n" + "6 O O O O O O O O 6" + "\n" + "5 O O O O O O O O 5" + "\n" + "4 O O O O O O O O 4" + "\n" + "3 O O O O O O O O 3" + "\n" + "2 P P P P P P P P 2"+ "\n" + "1 R N B K Q B N R 1" + "\n" + "  a b c d e f g h\n";
+		String chessboard="  a b c d e f g h" + "\r\n" + "8 r n b k q b n r 8" + "\r\n" + "7 p p p p p p p p 7" + "\r\n" + "6 O O O O O O O O 6" + "\r\n" + "5 O O O O O O O O 5" + "\r\n" + "4 O O O O O O O O 4" + "\r\n" + "3 O O O O O O O O 3" + "\r\n" + "2 P P P P P P P P 2"+ "\r\n" + "1 R N B K Q B N R 1" + "\r\n" + "  a b c d e f g h\r\n";
 		assertEquals(chessboard, baos.toString());
 	}
 	
@@ -519,7 +519,7 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.removeChessPiece("d8");
 		chessMonitoringSystem.endGame();
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Classic Mode.\n" + "a is the winner!\n", baos.toString());
+		assertEquals("This is Classic Mode.\n" + "a is the winner!\r\n", baos.toString());
 	}
 	
 	@Test
@@ -532,7 +532,7 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.removeChessPiece("d1");
 		chessMonitoringSystem.endGame();
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Classic Mode.\n" + "b is the winner!\n", baos.toString());
+		assertEquals("This is Classic Mode.\n" + "b is the winner!\r\n", baos.toString());
 	}
 	
 	@Test
@@ -546,7 +546,7 @@ public class TestCMS extends TestCase{
 		mode = new ScoringMode();
 		mode.addScore(p1, scoreRelated);
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Scoring Mode.\n" + "a" + " is the winner!" + "\n" + "winner's score: 100\n", baos.toString());
+		assertEquals("This is Scoring Mode.\n" + "a" + " is the winner!" + "\n" + "winner's score: 100\r\n", baos.toString());
 	}
 	
 	@Test
@@ -560,7 +560,7 @@ public class TestCMS extends TestCase{
 		mode = new ScoringMode();
 		mode.addScore(p2, scoreRelated);
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Scoring Mode.\n" + "b" + " is the winner!" + "\n" + "winner's score: 100\n", baos.toString());
+		assertEquals("This is Scoring Mode.\n" + "b" + " is the winner!" + "\n" + "winner's score: 100\r\n", baos.toString());
 	}
 	
 	@Test
@@ -571,7 +571,7 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.startGame(2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Scoring Mode.\n" + "Draw!\n", baos.toString());
+		assertEquals("This is Scoring Mode.\n" + "Draw!\r\n", baos.toString());
 	}
 	
 	@Test
@@ -585,7 +585,7 @@ public class TestCMS extends TestCase{
 		int[] scoreRelated={100, 0};
 		mode.addScore(p1, scoreRelated);
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Scoring+ Mode.\n" + "a"+ " is the winner!" + "\n" + "winner's score: 80\n", baos.toString());
+		assertEquals("This is Scoring+ Mode.\n" + "a"+ " is the winner!" + "\n" + "winner's score: 80\r\n", baos.toString());
 	}
 	
 	@Test
@@ -599,7 +599,7 @@ public class TestCMS extends TestCase{
 		int[] scoreRelated={100, 0};
 		mode.addScore(p2, scoreRelated);
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Scoring+ Mode.\n" + "b"+ " is the winner!" + "\n" + "winner's score: 80\n", baos.toString());
+		assertEquals("This is Scoring+ Mode.\n" + "b"+ " is the winner!" + "\n" + "winner's score: 80\r\n", baos.toString());
 	}
 	
 	@Test
@@ -610,7 +610,7 @@ public class TestCMS extends TestCase{
 		chessMonitoringSystem.startGame(3);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.getResult(p1, p2);
-		assertEquals("This is Scoring+ Mode.\n" + "Draw!\n", baos.toString());
+		assertEquals("This is Scoring+ Mode.\n" + "Draw!\r\n", baos.toString());
 	}
 	
 	//test moveChessPiece
@@ -775,7 +775,7 @@ public class TestCMS extends TestCase{
 		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.moveChessPiece(p1, "a2", "b3");
-		assertEquals("[The move is invalid.]\n", baos.toString());
+		assertEquals("[The move is invalid.]\r\n", baos.toString());
 	}
 	
 	@Test
@@ -794,7 +794,7 @@ public class TestCMS extends TestCase{
 		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.moveChessPiece(p1, "a7", "a6");
-		assertEquals("[Selected piece does not belong to you!]\n", baos.toString());
+		assertEquals("[Selected piece does not belong to you!]\r\n", baos.toString());
 	}
 	
 	@Test
@@ -813,6 +813,6 @@ public class TestCMS extends TestCase{
 		ChessPlayer p2 = new ChessPlayer("b", 2);
 		chessMonitoringSystem.initializeChessPieces(p1,p2);
 		chessMonitoringSystem.moveChessPiece(p1, "a3", "a4");
-		assertEquals("[Chesspiece not found!]\n", baos.toString());
+		assertEquals("[Chesspiece not found!]\r\n", baos.toString());
 	}
 }
