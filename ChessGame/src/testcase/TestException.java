@@ -2,19 +2,13 @@ package testcase;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import org.junit.Test;
 
 import chessGame.ExEnemyChessSelected;
 import chessGame.ExInvalidMove;
 import chessGame.ExNullMovingChess;
-import chessGame.ExOwnChessCaptured;
 
 public class TestException {
-	private ByteArrayOutputStream baos;
-	private PrintStream ps;
 
 	@Test
 	public void testExEnemyChessSelected() {
@@ -35,13 +29,6 @@ public class TestException {
 		ExNullMovingChess ex = new ExNullMovingChess();
 		String result = ex.getLocalizedMessage();
 		assertEquals("Chesspiece not found!", result);
-	}
-	
-	@Test
-	public void testExOwnChessCaptured() {
-		ExOwnChessCaptured ex = new ExOwnChessCaptured();
-		String result = ex.getLocalizedMessage();
-		assertEquals("You cannot capture your own chessPiece!", result);
 	}
 
 }
