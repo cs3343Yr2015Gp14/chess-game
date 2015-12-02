@@ -13,7 +13,7 @@ public class Bishop extends ChessPiece {
 		// throw new UnsupportedOperationException();
 		// TO-DO: Exception own chess
 		
-		if(position==moveTo)
+		if(position.equals(moveTo))
 			return false;
 		
 		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();

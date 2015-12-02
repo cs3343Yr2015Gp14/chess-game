@@ -20,24 +20,26 @@ public class Pawn extends ChessPiece {
 		
 		ChessMonitoringSystem CMS = ChessMonitoringSystem.getInstance();
 		
-		if(position==moveTo)
+		if (position.equals(moveTo))
 			return false;
 		
 		//pawn can only move forward
-		if(CMS.getChessPiece(moveTo)==null)
+		if (CMS.getChessPiece(moveTo)==null)
 		{
-			if (isSameXPos && !isBlocked(moveTo) && isForwardMove(moveTo))
+			if (isSameXPos && isForwardMove(moveTo) && !isBlocked(moveTo)) 
 			{
-				//special move: 2 grids forward at initial position
-				if (position.charAt(1)==initialYPos1 || position.charAt(1)==initialYPos2)
-				{
-					if (Math.abs(yPosDiff)==2)
+				{ 
+					//special move: 2 grids forward at initial position
+					if (position.charAt(1)==initialYPos1 || position.charAt(1)==initialYPos2)
+					{
+						if (Math.abs(yPosDiff)==2)
+							return true;
+					}
+					
+					//other moves: 1 grid forward
+					if (Math.abs(yPosDiff)==1)
 						return true;
 				}
-				
-				//other moves: 1 grid forward
-				if (Math.abs(yPosDiff)==1)
-					return true;
 			}
 		}
 		else 
