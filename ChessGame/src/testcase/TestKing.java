@@ -158,4 +158,11 @@ public class TestKing extends TestCase{
 		String stringResult = king.toString();
 		assertEquals(stringResult, "k");
 	}
+	
+	@Test
+	public void testOtherPrintKing() {
+		King king = new King(new ChessPlayer("John", 3), null);
+		String stringResult = king.toString();
+		assertEquals(stringResult, null);
+	}
 }

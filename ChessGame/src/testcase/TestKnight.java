@@ -115,4 +115,11 @@ public class TestKnight extends TestCase{
 		String stringResult = knight.toString();
 		assertEquals(stringResult, "n");
 	}
+	
+	@Test
+	public void testOtherPrintKnight() {
+		Knight knight = new Knight(new ChessPlayer("John", 3), null);
+		String stringResult = knight.toString();
+		assertEquals(stringResult, null);
+	}
 }

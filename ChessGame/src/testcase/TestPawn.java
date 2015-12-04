@@ -161,6 +161,17 @@ public class TestPawn extends TestCase{
 	}
 	
 	@Test
+	//Test case: test for Player 2 pawn's backward move, a7->a5, b2->b6, a5->b6
+	public void testPlayer2PawnBackwardMove() {
+		ChessPiece pawnAta7 = cms.getChessPiece("a7");
+		pawnAta7.updatePosition("a5");
+		ChessPiece pawnAtb2 = cms.getChessPiece("b2");
+		pawnAtb2.updatePosition("b6");
+		boolean moveResult = pawnAta7.isValidMove("b6");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
 	public void testPawnGetScore() {
 		Pawn pawn = new Pawn(new ChessPlayer("John", 1), null);
 		int score = pawn.getScore();
@@ -179,5 +190,12 @@ public class TestPawn extends TestCase{
 		Pawn pawn = new Pawn(new ChessPlayer("John", 2), null);
 		String stringResult = pawn.toString();
 		assertEquals(stringResult, "p");
+	}
+	
+	@Test
+	public void testOtherPrintPawn() {
+		Pawn pawn = new Pawn(new ChessPlayer("John", 3), null);
+		String stringResult = pawn.toString();
+		assertEquals(stringResult, null);
 	}
 }

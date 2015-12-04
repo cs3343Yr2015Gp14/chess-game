@@ -128,6 +128,24 @@ public class TestBishop extends TestCase{
 	}
 	
 	@Test
+	//Test case: test for Player 1 bishop's capture enemy, c1->c3->g7
+	public void testPlayer1BishopCaptureEnenmy() {
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
+		bishopAtc1.updatePosition("c3");
+		boolean moveResult = bishopAtc1.isValidMove("g7");
+		assertEquals(moveResult, true);
+	}
+	
+	@Test
+	//Test case: test for Player 1 bishop's capture enemy, c1->c3->d2
+	public void testPlayer1BishopCaptureOwn() {
+		ChessPiece bishopAtc1 = cms.getChessPiece("c1");
+		bishopAtc1.updatePosition("c3");
+		boolean moveResult = bishopAtc1.isValidMove("d2");
+		assertEquals(moveResult, false);
+	}
+	
+	@Test
 	public void testBishopGetScore() {
 		Bishop bishop = new Bishop(new ChessPlayer("John", 1), null);
 		int score = bishop.getScore();
@@ -146,5 +164,12 @@ public class TestBishop extends TestCase{
 		Bishop bishop = new Bishop(new ChessPlayer("John", 2), null);
 		String stringResult = bishop.toString();
 		assertEquals(stringResult, "b");
+	}
+	
+	@Test
+	public void testOtherPrintBishop() {
+		Bishop bishop = new Bishop(new ChessPlayer("John", 3), null);
+		String stringResult = bishop.toString();
+		assertEquals(stringResult, null);
 	}
 }
